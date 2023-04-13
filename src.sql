@@ -1,4 +1,5 @@
 -- create project schema
+drop schema if exists NBA;
 create schema if not exists NBA;
 use NBA; 
 
@@ -141,5 +142,7 @@ create table if not exists game_player_info(
     PTS int,
     PLUS_MINUS int
 );
+
+-- insert data into DB from csv file name ""
 
 
