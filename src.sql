@@ -2,17 +2,13 @@
 create schema if not exists NBA;
 use NBA; 
 
--- create project table
+-- DDL: create project table
+-- player info
 create table if not exists player(
     PLAYER_ID int PRIMARY KEY,
     PLAYER_NAME varchar(255),
-    PLAYER_AGE INT,
-    PLAYER_HEIGHT float,
-    PLAYER_WEIGHT float,
     COUNTRY varchar(20),
     DRAFT_YEAR year,
-    DRAFT_ROUND int,
-    DRAFT_NUMBER INT, 
     GP int,
     PTS float,
     REB float,
@@ -23,15 +19,15 @@ create table if not exists player(
     USG_PCT float,
     TS_PCT float,
     AST_PCT float,
-    SEASON year -- modify import data
 );
 
+-- player info with specific season
 create table if not exists player_season_info(
     PLAYER_ID int PRIMARY KEY,
-    SEASON year PRIMARY KEY, -- modify import data
-    TEAM_ABBR char(3) PRIMARY KEY, -- TO IMPROVE?
+    SEASON year PRIMARY KEY,
+    TEAM_ABBR char(3) PRIMARY KEY,
     PLAYER_POSITION varchar(2),
-    PLAYER_AGE INT, -- redundant
+    PLAYER_AGE INT,
     G int, 
     GS int,
     MP float,
@@ -49,16 +45,17 @@ create table if not exists player_season_info(
     FT_PERCENTAGE float,
     ORB float,
     TRB float,
-    AST float, -- redundant
+    AST float,
     STL float,
     BLK float,
     TOV float,
     PF float,
-    PTS float -- redundant
+    PTS float
 );
 
+-- team info
 create table if not exists team(
-    TEAM_ID int PRIMARY KEY, -- ??
+    TEAM_ID int PRIMARY KEY,
     TEAM_NAME varchar(255),
     TEAM_ABBR char(3),
     EW_LOCATION char(4),
@@ -66,51 +63,49 @@ create table if not exists team(
     TEAM_LOCATION varchar(255)
 );
 
+-- team info with specific season
 create table if not exists team_season_info(
     TEAM_ID int PRIMARY KEY,
-    SEASON year PRIMARY KEY, -- modify import data
+    SEASON year PRIMARY KEY,
     GP int,
     W int,
     L int,
     WIN_PERCENTAGE float,
     MIN float,
     FGM float,
-    FGA float, -- redundant?
-    FG_PERCENTAGE float, -- redundant
+    FGA float,
+    FG_PERCENTAGE float,
     3PM float,
-    3P_PERCENTAGE float, -- redundant
+    3P_PERCENTAGE float,
     FTM float,
-    FTA float, -- redundant
-    FT_PERCENTAGE float, -- redundant
-    OREB float, -- redundant
-    DREB float, -- redundant
-    REB float, -- redundant
-    AST float, -- redundant
-    TOV float, -- redundant
-    STL float, -- redundant
-    BLK float, -- redundant
-    BLKA float, -- redundant
-    PF float, -- redundant
-    PFD float, -- redundant
-    POSITIVE_NEGATIVE float -- leave or not?
+    FTA float,
+    FT_PERCENTAGE float,
+    OREB float,
+    DREB float,
+    REB float,
+    AST float,
+    TOV float,
+    STL float,
+    BLK float,
+    BLKA float,
+    PF float,
+    PFD float,
+    POSITIVE_NEGATIVE float
 );
 
-
+-- game info
 create table if not exists game(
-    GAME_ID int PRIMARY KEY, -- ???
+    GAME_ID int PRIMARY KEY,
     GAME_DATE date,
-    -- GAME_STATUS char(5), -- complete or not
     HOST_TEAM_ID int,
     VISITOR_TEAM_ID int,
-    SEASON year, -- modify import data
-    -- TEAM_ID_HOME int, --modify import data, delete one column
+    SEASON year,
     PTS_HOME int,
     FG_PCT_HOME float,
     FT_PCT_HOME float,
     FG3_PCT_HOME float,
     AST_HOME int,
     REB_HOME int,
-    -- TEAM_ID_AWAY int, --modify import data, delete one column?
     PTS_AWAY int,
     FG_PCT_AWAY float,
     FT_PCT_AWAY float,
@@ -120,15 +115,11 @@ create table if not exists game(
     HOME_TEAM_WIN tinyint -- 0/1
 );
 
-
+-- game info with specific season
 create table if not exists game_player_info(
-    GAME_ID int PRIMARY KEY, -- ???
+    GAME_ID int PRIMARY KEY,
     PLAYER_ID int PRIMARY KEY,
     TEAM_ID int, 
-    -- TEAM_ABBREVIATION char(3),
-    -- TEAM_CITY varchar(35),
-    -- NICKNAME varchar(255),
-    -- START_POSITION char(1),
     MIN time,
     FGM int,
     FGA int,
