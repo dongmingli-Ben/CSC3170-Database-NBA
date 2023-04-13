@@ -5,6 +5,7 @@ use NBA;
 
 -- DDL: create project table
 -- player info
+drop table if exists player;
 create table if not exists player(
     PLAYER_ID int PRIMARY KEY,
     PLAYER_NAME varchar(255),
@@ -19,14 +20,15 @@ create table if not exists player(
     DREB_PCT float,
     USG_PCT float,
     TS_PCT float,
-    AST_PCT float,
+    AST_PCT float
 );
 
 -- player info with specific season
+drop table if exists player_season_info;
 create table if not exists player_season_info(
-    PLAYER_ID int PRIMARY KEY,
-    SEASON year PRIMARY KEY,
-    TEAM_ABBR char(3) PRIMARY KEY,
+    PLAYER_ID int,
+    SEASON year,
+    TEAM_ABBR char(3),
     PLAYER_POSITION varchar(2),
     PLAYER_AGE INT,
     G int, 
@@ -51,10 +53,12 @@ create table if not exists player_season_info(
     BLK float,
     TOV float,
     PF float,
-    PTS float
+    PTS float,
+    PRIMARY KEY(PLAYER_ID, SEASON, TEAM_ABBR)
 );
 
 -- team info
+drop table if exists team;
 create table if not exists team(
     TEAM_ID int PRIMARY KEY,
     TEAM_NAME varchar(255),
@@ -65,9 +69,10 @@ create table if not exists team(
 );
 
 -- team info with specific season
+drop table if exists team_season_info;
 create table if not exists team_season_info(
-    TEAM_ID int PRIMARY KEY,
-    SEASON year PRIMARY KEY,
+    TEAM_ID int,
+    SEASON year,
     GP int,
     W int,
     L int,
@@ -91,10 +96,12 @@ create table if not exists team_season_info(
     BLKA float,
     PF float,
     PFD float,
-    POSITIVE_NEGATIVE float
+    POSITIVE_NEGATIVE float,
+    PRIMARY KEY(TEAM_ID, SEASON)
 );
 
 -- game info
+drop table if exists game;
 create table if not exists game(
     GAME_ID int PRIMARY KEY,
     GAME_DATE date,
@@ -117,9 +124,10 @@ create table if not exists game(
 );
 
 -- game info with specific season
+drop table if exists game_player_info;
 create table if not exists game_player_info(
-    GAME_ID int PRIMARY KEY,
-    PLAYER_ID int PRIMARY KEY,
+    GAME_ID int,
+    PLAYER_ID int,
     TEAM_ID int, 
     MIN time,
     FGM int,
@@ -140,9 +148,10 @@ create table if not exists game_player_info(
     TO_NUM int,
     PF int,
     PTS int,
-    PLUS_MINUS int
+    PLUS_MINUS int,
+    PRIMARY KEY(GAME_ID, PLAYER_ID)
 );
 
--- insert data into DB from csv file name ""
+-- insert data into DB from csv file name under "/final_data"
 
 
