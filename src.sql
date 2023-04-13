@@ -152,6 +152,7 @@ create table if not exists game_player_info(
     PRIMARY KEY(GAME_ID, PLAYER_ID)
 );
 
--- insert data into DB from csv file name under "/final_data"
+-- insert data into DB from csv file name under "data" path
+-- perform import by MYSQL workbench table data import wizard
 
 
