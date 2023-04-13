@@ -1,6 +1,6 @@
 -- create project schema
 drop schema if exists NBA;
-create schema if not exists NBA;
+create schema if not exists NBA DEFAULT CHARACTER SET utf8 ;;
 use NBA; 
 
 -- DDL: create project table
