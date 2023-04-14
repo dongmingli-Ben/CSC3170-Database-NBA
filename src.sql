@@ -1,6 +1,6 @@
 -- create project schema
 drop schema if exists NBA;
-create schema if not exists NBA DEFAULT CHARACTER SET utf8;
+create schema if not exists NBA DEFAULT CHARACTER SET utf8 ;
 use NBA; 
 
 -- DDL: create project table
@@ -9,8 +9,8 @@ drop table if exists player;
 create table if not exists player(
     PLAYER_ID int PRIMARY KEY,
     PLAYER_NAME varchar(255),
-    COUNTRY varchar(20),
     DRAFT_YEAR year,
+    COUNTRY varchar(20),
     GP int,
     PTS float,
     REB float,
@@ -29,7 +29,7 @@ create table if not exists player_season_info(
     PLAYER_ID int,
     SEASON year,
     TEAM_ABBR char(3),
-    PLAYER_POSITION varchar(2),
+    PLAYER_POSITION varchar(10),  -- for cases like SG-SF
     PLAYER_AGE INT,
     G int, 
     GS int,
@@ -38,6 +38,7 @@ create table if not exists player_season_info(
     FGA float,
     FG_PERCENTAGE float,
     3P float,
+    3PA float,
     3P_PERCENTAGE float,
     2P float,
     2PA float,
@@ -47,6 +48,7 @@ create table if not exists player_season_info(
     FTA float,
     FT_PERCENTAGE float,
     ORB float,
+    DRB float,
     TRB float,
     AST float,
     STL float,
@@ -78,10 +80,12 @@ create table if not exists team_season_info(
     L int,
     WIN_PERCENTAGE float,
     MIN float,
+    PTS float,
     FGM float,
     FGA float,
     FG_PERCENTAGE float,
     3PM float,
+    3PA float,
     3P_PERCENTAGE float,
     FTM float,
     FTA float,
@@ -152,7 +156,4 @@ create table if not exists game_player_info(
     PRIMARY KEY(GAME_ID, PLAYER_ID)
 );
 
--- insert data into DB from csv file name under "data" path
--- perform import by MYSQL workbench table data import wizard
-
-
+-- insert data into DB from csv file name under "/final_data"

@@ -1,4 +1,4 @@
-# NBA数据
+# NBA 数据
 
 ## 任务与分工
 
@@ -6,13 +6,25 @@
 
 - 提出数据分析问题，写数据库和分析的代码：余加阳，黄颖仪，李东明
 
-- 写ppt：
+- 写 ppt：
 
-下一次meet时间：4.15 10 am
+下一次 meet 时间：4.15 10 am
 
 ## ER Diagram
 
 ![image](assets/er-diagram-0411.jpg)
+
+## 数据导入
+
+需要处理原始数据中的空值：
+
+```bash
+python prepare_data.py
+```
+
+需要先安装 `pandas` (`pip install pandas`).
+
+然后使用 workbench 导入数据，导入时间比较长。
 
 ## Potential Analytical Questions
 
