@@ -28,19 +28,19 @@ python prepare_data.py
 
 ## Potential Analytical Questions
 
-- Find the top 10 players in terms of points per game (PPG) for the 2022 season
+- Find the top 10 players in terms of points per game (PPG) for the 2021 season
 
-- Calculate the average field goal percentage (FG%) for each team for the 2022 season
+- Calculate the average field goal percentage (FG%) for each team for the 2021 season
 
-- Find the player with the highest usage percentage (USG%) for each team in the 2022 season
+- Find the player with the highest usage percentage (USG%) for each team in the 2021 season
 
-- Calculate the average points per game (PPG) and rebounds per game (RPG) for each player position for the 2022 season
+- Calculate the average points per game (PPG) and rebounds per game (RPG) for each player position for the 2021 season
 
-- Find the top 10 players in terms of net rating (NET_RATING) for the 2022 season
+- Find the top 10 players in terms of net rating (NET_RATING) for the 2021 season
 
-- Calculate the number of wins and losses for each team in the 2022 season
+- Calculate the number of wins and losses for each team in the 2021 season
 
-- Find the player with the highest field goal percentage (FG%) for each position in the 2022 season
+- Find the player with the highest field goal percentage (FG%) for each position in the 2021 season
 
 - Are teams more likely to win when they are the host? If so, by how much?
 
