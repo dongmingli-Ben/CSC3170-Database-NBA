@@ -24,7 +24,7 @@ python prepare_data.py
 
 需要先安装 `pandas` (`pip install pandas`).
 
-然后使用 workbench 导入数据，导入时间比较长。
+然后使用 workbench 导入数据(`xxx_null.csv`)，导入时间比较长。
 
 ## Potential Analytical Questions
 

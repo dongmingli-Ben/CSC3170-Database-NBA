@@ -131,3 +131,5 @@ dmypy.json
 *.zip
 test.py
 *_null*
+game-player-new.csv
+*_min*
