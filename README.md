@@ -65,3 +65,6 @@ python prepare_data.py
 * Apr 23: COMPELETE code, slides, presentation!!!
 * Apr 24/26: presentation
 * May 9: submit report
+
+## Next meeting
+Apr 19, 8pm
