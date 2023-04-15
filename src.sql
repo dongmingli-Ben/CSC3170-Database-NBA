@@ -29,7 +29,6 @@ create table if not exists player_season_info(
     PLAYER_ID int,
     SEASON year,
     TEAM_ABBR char(3),
-    PLAYER_POSITION varchar(10),  -- for cases like SG-SF
     PLAYER_AGE INT,
     G int, 
     GS int,
