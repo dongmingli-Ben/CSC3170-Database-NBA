@@ -73,3 +73,16 @@ Note: `PLAYER_POSITION`在 player_season_info 中删除，加入到 game_player_
 ## Next meeting
 
 Apr 19, 8pm
+
+## Demo
+
+### Frontend
+
+Run:
+
+```bash
+npm install
+npm run hotloader
+```
+
+Then you should be able to view the webpage at `http://localhost:5050/`.
