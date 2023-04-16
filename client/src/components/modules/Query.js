@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 
+import "./Query.css";
+
 /**
  * Display the query frame and set new query
  *
@@ -9,15 +11,18 @@ import React, { useEffect, useState } from "react";
 const Query = (props) => {
   const [inputQuery, setInputQuery] = useState("");
   return (
-    <div className="query-container">
-      <QueryInput setInputQuery={setInputQuery} inputQuery={inputQuery} />
-      <button
-        onClick={() => props.setQuery(inputQuery)}
-        value="Query"
-        type="submit"
-      >
-        Query
-      </button>
+    <div className="top-query-container">
+      <div className="query-container u-textCenter u-relative">
+        <QueryInput setInputQuery={setInputQuery} inputQuery={inputQuery} />
+        <button
+          onClick={() => props.setQuery(inputQuery)}
+          value="Query"
+          type="submit"
+          className="submit-btn u-pointer"
+        >
+          Query
+        </button>
+      </div>
     </div>
   );
 };
@@ -38,7 +43,7 @@ const QueryInput = (props) => {
       onChange={(event) => {
         props.setInputQuery(event.target.value);
       }}
-      className="NewPostInput-input"
+      className="newQuery-container"
     />
   );
 };

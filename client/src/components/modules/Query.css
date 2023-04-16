@@ -1,0 +1,31 @@
+.top-query-container {
+  background-color: var(--primary--dim);
+  margin: 0;
+  width: 100%;
+}
+
+.query-container {
+  /* margin: var(--m) var(--l); */
+  padding: var(--m) var(--l);
+  width: 80%;
+  height: 150px;
+  margin: 0px;
+}
+
+.newQuery-container {
+  width: 60%;
+  height: 90%;
+  border-radius: var(--l);
+  border: 0px;
+  margin-left: 10%;
+}
+
+.submit-btn {
+  height: 50%;
+  width: 15%;
+  margin-left: 10%;
+  border-radius: var(--s);
+  border: 0px;
+  color: var(--primary);
+  font-size: var(--m);
+}

@@ -18,8 +18,8 @@ const TableContent = (props) => {
   }
   console.log(columns);
 
-  content = props.content.map((row) => {
-    return <TableRow row={row} columns={columns} />;
+  content = props.content.map((row, index) => {
+    return <TableRow row={row} columns={columns} key={index} />;
   });
 
   return <div className="tableContent-container">{content}</div>;

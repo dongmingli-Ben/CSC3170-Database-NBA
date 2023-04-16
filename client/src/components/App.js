@@ -4,6 +4,7 @@ import Feed from "./modules/Feed.js";
 
 // to use styles, import the necessary CSS files
 import "./App.css";
+import "../utility.css";
 
 /**
  * Define the "App" component as a function.
@@ -16,7 +17,7 @@ const App = () => {
     // <> is like a <div>, but won't show
     // up in the DOM tree
     <>
-      <div className="App-container">
+      <div className="app-container body">
         <Query setQuery={setQuery} />
         <Feed query={query} />
       </div>
