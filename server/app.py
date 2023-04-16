@@ -27,7 +27,10 @@ def get_query():
     query = request.args.get('query', '')
     if query == '':
         return {'content': ''}
-    cursor.execute(query)
+    try:
+        cursor.execute(query)
+    except Exception as e:
+        return {'error_message': str(e)}
     col_names = cursor.column_names
     data = cursor.fetchall()
     result = []

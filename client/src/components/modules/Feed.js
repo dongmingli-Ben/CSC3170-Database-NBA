@@ -48,6 +48,11 @@ const Feed = (props) => {
     get(`${API_URL}/query`, { query: props.query }).then((result) => {
       console.log("query returned:");
       console.log(result);
+      if (result.hasOwnProperty("error_message")) {
+        // display error message
+        setMessage(result.error_message);
+        return;
+      }
       if (result["content"].length === 0) {
         setQueryResult([]);
       } else {
