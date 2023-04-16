@@ -19,7 +19,7 @@ const App = () => {
     <>
       <div className="app-container body">
         <Query setQuery={setQuery} />
-        <Feed query={query} />
+        <Feed query={query} setQuery={setQuery} />
       </div>
     </>
   );

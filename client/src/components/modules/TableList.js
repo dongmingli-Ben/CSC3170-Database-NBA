@@ -7,13 +7,21 @@ import "./TableList.css";
  *
  * Proptypes
  * @param {{string}[]} list the list of tables
+ * @param {(string) => void} setQuery set the query (for exploring tables)
  */
 const TableList = (props) => {
   let content;
 
   content = props.list.map((tableName, index) => {
     return (
-      <div key={index} className="tableName-container u-pointer">
+      <div
+        key={index}
+        className="tableName-container u-pointer"
+        onClick={() => {
+          console.log(tableName);
+          props.setQuery(`select * from ${tableName} limit 15;`);
+        }}
+      >
         {tableName}
       </div>
     );

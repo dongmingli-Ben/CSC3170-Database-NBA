@@ -23,6 +23,7 @@ const API_URL = "http://10.31.38.201:34152";
  *
  * Proptypes
  * @param {string} query the current query
+ * @param {(string) => void} setQuery set the query (for exploring tables)
  */
 const Feed = (props) => {
   const [queryResult, setQueryResult] = useState([]);
@@ -51,7 +52,7 @@ const Feed = (props) => {
 
   return (
     <div className="content-container u-flex u-relative">
-      <TableList list={tableList} />
+      <TableList list={tableList} setQuery={props.setQuery} />
       <TableContent content={queryResult} />
     </div>
   );
