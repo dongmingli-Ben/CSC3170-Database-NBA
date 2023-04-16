@@ -1,0 +1,35 @@
+from flask import Flask, request
+import mysql.connector
+import json
+
+def prepare_cursor():
+    with open('config.json') as f:
+        config = json.load(f)
+    cnx = mysql.connector.connect(**config)
+    cursor = cnx.cursor(buffered=True)
+    return cursor, cnx
+
+app = Flask(__name__)
+
+cursor, cnx = prepare_cursor()
+
+@app.route("/tables", methods=['GET'])
+def get_tables():
+    cursor.execute('SHOW tables;')
+    result = cursor.fetchall()
+    tables = [t[0] for t in result]
+    return {'content': tables}
+
+@app.route("/query", methods=['GET'])
+def get_query():
+    query = request.args.get('query', '')
+    cursor.execute(query)
+    col_names = cursor.column_names
+    data = cursor.fetchall()
+    result = []
+    for item in data:
+        result.append(dict(zip(col_names, item)))
+    return {"content": result}
+
+if __name__ == '__main__':
+    app.run(debug=True, host='0.0.0.0', port=34152)

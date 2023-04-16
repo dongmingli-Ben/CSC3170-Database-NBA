@@ -136,3 +136,6 @@ game-player-new.csv
 
 # frontend stuff
 node_modules
+
+# backend stuff
+server/config.json

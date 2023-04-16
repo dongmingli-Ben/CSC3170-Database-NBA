@@ -86,3 +86,25 @@ npm run hotloader
 ```
 
 Then you should be able to view the webpage at `http://localhost:5050/`.
+
+### Backend
+
+Set up configuration first by adding the following to `server/config.json`:
+
+```json
+{
+  "user": "your username",
+  "password": "your password",
+  "host": "127.0.0.1",
+  "database": "nba"
+}
+```
+
+Then run:
+
+```bash
+cd server
+python app.py
+```
+
+Note that `flask` needs to be installed first.
