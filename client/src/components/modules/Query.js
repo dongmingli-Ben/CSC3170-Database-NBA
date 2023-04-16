@@ -12,13 +12,16 @@ const Query = (props) => {
   const [inputQuery, setInputQuery] = useState("");
   return (
     <div className="top-query-container">
-      <div className="query-container u-textCenter u-relative">
+      <div className="query-container u-flex u-flex-alignCenter u-flex-justifyCenter">
         <QueryInput setInputQuery={setInputQuery} inputQuery={inputQuery} />
         <button
-          onClick={() => props.setQuery(inputQuery)}
+          onClick={() => {
+            console.log(inputQuery);
+            props.setQuery(inputQuery);
+          }}
           value="Query"
           type="submit"
-          className="submit-btn u-pointer"
+          className="submit-btn u-pointer u-bold"
         >
           Query
         </button>
@@ -36,14 +39,14 @@ const Query = (props) => {
  */
 const QueryInput = (props) => {
   return (
-    <input
+    <textarea
       type="text"
-      placeholder=""
+      placeholder="SELECT * FROM players LIMIT 100;"
       value={props.inputQuery}
       onChange={(event) => {
         props.setInputQuery(event.target.value);
       }}
-      className="newQuery-container"
+      className="newQuery-container input"
     />
   );
 };

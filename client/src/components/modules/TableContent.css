@@ -1,0 +1,28 @@
+.tableContent-container {
+  width: 100%;
+}
+
+.tableContent-header {
+  border-bottom: 1px solid var(--primary);
+}
+
+.tableContent-content-container {
+  margin: 1% 0%;
+}
+
+.tableContent-column-container,
+.tableRow-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.tableContent-column-container > *,
+.tableRow-container > * {
+  flex-basis: calc(100% / 5);
+  /* text-align: center; */
+  padding: 8px;
+}
+
+.tableContent-column-container > * {
+  font-weight: bold;
+}

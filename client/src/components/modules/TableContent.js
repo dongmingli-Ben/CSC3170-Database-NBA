@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 
+import "./TableContent.css";
+
 /**
  * display the query result (a table)
  *
@@ -22,10 +24,18 @@ const TableContent = (props) => {
     return <TableRow row={row} columns={columns} key={index} />;
   });
 
+  let columnRow = <></>;
+  if (columns !== null) {
+    columnRow = columns.map((columnName, index) => {
+      return <TableCell value={columnName} key={index} />;
+    });
+  }
+
   return (
     <div className="tableContent-container">
       <h3 className="tableContent-header">Query Result</h3>
-      <div className="tableContent-content-container">{content}</div>
+      <div className="tableContent-column-container">{columnRow}</div>
+      {content}
     </div>
   );
 };
@@ -48,7 +58,7 @@ const TableRow = (props) => {
     return <TableCell value={props.row[name]} key={index} />;
   });
 
-  return <div>{content}</div>;
+  return <div className="tableRow-container">{content}</div>;
 };
 
 /**
@@ -58,7 +68,7 @@ const TableRow = (props) => {
  * @param {Object} value the cell value
  */
 const TableCell = (props) => {
-  return <div>{props.value}</div>;
+  return <div className="">{props.value}</div>;
 };
 
 export default TableContent;

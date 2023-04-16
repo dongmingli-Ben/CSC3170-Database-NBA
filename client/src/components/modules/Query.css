@@ -14,10 +14,12 @@
 
 .newQuery-container {
   width: 60%;
-  height: 90%;
-  border-radius: var(--l);
+  height: 80%;
+  border-radius: var(--s);
   border: 0px;
-  margin-left: 10%;
+  margin-left: 20%;
+  padding: 10px 5px;
+  font: inherit;
 }
 
 .submit-btn {
@@ -28,4 +30,15 @@
   border: 0px;
   color: var(--primary);
   font-size: var(--m);
+  font-family: inherit;
+}
+
+.input {
+  border: 1px solid transparent;
+}
+
+.input:focus {
+  outline: none !important;
+  border: 1px solid var(--primary);
+  box-shadow: 0 0 10px #719ece;
 }
