@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import TableList from "./TableList.js";
 import TableContent from "./TableContent.js";
+import { get } from "../../utility.js";
 
 import "./Feed.css";
 
@@ -15,6 +16,8 @@ const TABLE = [
   },
 ];
 
+const API_URL = "http://10.31.38.201:34152";
+
 /**
  * The main display content, including list of tables and query result
  *
@@ -26,7 +29,10 @@ const Feed = (props) => {
   const [tableList, setTableList] = useState([]);
   // fetch query result from api
   useEffect(() => {
-    setTableList(["game", "game_player_info"]);
+    get(`${API_URL}/tables`).then((result) => {
+      console.log(result);
+      setTableList(result["content"]);
+    });
   }, []);
 
   useEffect(() => {

@@ -1,4 +1,5 @@
 from flask import Flask, request
+from flask_cors import CORS
 import mysql.connector
 import json
 
@@ -10,6 +11,7 @@ def prepare_cursor():
     return cursor, cnx
 
 app = Flask(__name__)
+CORS(app)
 
 cursor, cnx = prepare_cursor()
 
