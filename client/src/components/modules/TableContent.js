@@ -34,9 +34,11 @@ const TableContent = (props) => {
   return (
     <div className="tableContent-container">
       <h3 className="tableContent-header">Query Result</h3>
-      <div className="tableContent-table-container">
-        <div className="tableContent-column-container">{columnRow}</div>
-        {content}
+      <div className="tableContent-table-wrapper">
+        <div className="tableContent-table-container">
+          <div className="tableContent-column-container">{columnRow}</div>
+          {content}
+        </div>
       </div>
     </div>
   );
