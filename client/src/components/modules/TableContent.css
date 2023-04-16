@@ -1,17 +1,10 @@
 .tableContent-container {
   width: 100%;
+  overflow-x: auto;
 }
 
 .tableContent-header {
   border-bottom: 1px solid var(--primary);
-}
-
-.tableContent-content-container {
-  margin: 1% 0%;
-}
-
-.tableContent-table-wrapper {
-  overflow: scroll;
 }
 
 .tableContent-table-container {
@@ -26,7 +19,7 @@
 
 .tableContent-column-container > *,
 .tableRow-container > * {
-  flex-basis: calc(100% / 5);
+  flex-basis: calc(100% / 6);
   /* text-align: center; */
   padding: 8px;
 }
