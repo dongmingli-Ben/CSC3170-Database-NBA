@@ -1,0 +1,12 @@
+.tableList-container {
+  width: 30%;
+  margin-right: 5%;
+}
+
+.tableList-header {
+  border-bottom: 1px solid var(--primary);
+}
+
+.tableName-container {
+  margin: 1% 0%;
+}

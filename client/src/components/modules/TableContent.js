@@ -22,7 +22,12 @@ const TableContent = (props) => {
     return <TableRow row={row} columns={columns} key={index} />;
   });
 
-  return <div className="tableContent-container">{content}</div>;
+  return (
+    <div className="tableContent-container">
+      <h3 className="tableContent-header">Query Result</h3>
+      <div className="tableContent-content-container">{content}</div>
+    </div>
+  );
 };
 
 /**

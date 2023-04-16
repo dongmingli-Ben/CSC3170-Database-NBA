@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import TableList from "./TableList.js";
 import TableContent from "./TableContent.js";
 
+import "./Feed.css";
+
 const TABLE = [
   {
     PLAYER_ID: 1,
@@ -34,7 +36,7 @@ const Feed = (props) => {
   console.log(props.query);
 
   return (
-    <div>
+    <div className="content-container u-flex u-relative">
       <TableList list={tableList} />
       <TableContent content={queryResult} />
     </div>
