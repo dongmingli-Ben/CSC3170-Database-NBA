@@ -26,7 +26,7 @@ const API_URL = "http://10.31.38.201:34152";
  * @param {(string) => void} setQuery set the query (for exploring tables)
  */
 const Feed = (props) => {
-  const [queryResult, setQueryResult] = useState([]);
+  const [queryResult, setQueryResult] = useState(null);
   const [tableList, setTableList] = useState([]);
   // fetch query result from api
   useEffect(() => {
@@ -36,7 +36,15 @@ const Feed = (props) => {
     });
   }, []);
 
+  const [message, setMessage] = useState("");
+
   useEffect(() => {
+    setQueryResult(null);
+    if (props.query === "") {
+      setMessage("Please enter a query!");
+      return;
+    }
+    setMessage("Loading query results...");
     get(`${API_URL}/query`, { query: props.query }).then((result) => {
       console.log("query returned:");
       console.log(result);
@@ -53,7 +61,7 @@ const Feed = (props) => {
   return (
     <div className="content-container u-flex u-relative">
       <TableList list={tableList} setQuery={props.setQuery} />
-      <TableContent content={queryResult} />
+      <TableContent content={queryResult} message={message} />
     </div>
   );
 };

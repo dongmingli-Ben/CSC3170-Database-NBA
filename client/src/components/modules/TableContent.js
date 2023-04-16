@@ -7,8 +7,19 @@ import "./TableContent.css";
  *
  * Proptypes
  * @param {Array} content the query result in JSON format
+ * @param {string} message the message to display when content is null
  */
 const TableContent = (props) => {
+  if (props.content === null) {
+    console.log(props.message);
+    return (
+      <div className="tableContent-container u-relative">
+        <h3 className="tableContent-header">Query Result</h3>
+        <h5>{props.message}</h5>
+      </div>
+    );
+  }
+
   let content;
   let columns = null;
 
