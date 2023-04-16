@@ -10,10 +10,14 @@
   margin: 1% 0%;
 }
 
+.tableContent-table-container {
+  display: table;
+}
+
 .tableContent-column-container,
 .tableRow-container {
-  display: flex;
-  flex-wrap: wrap;
+  display: table-row;
+  /* flex-wrap: wrap; */
 }
 
 .tableContent-column-container > *,
@@ -25,4 +29,8 @@
 
 .tableContent-column-container > * {
   font-weight: bold;
+}
+
+.tableCell-container {
+  display: table-cell;
 }

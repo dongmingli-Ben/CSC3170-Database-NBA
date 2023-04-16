@@ -36,7 +36,15 @@ const Feed = (props) => {
   }, []);
 
   useEffect(() => {
-    setQueryResult(TABLE);
+    get(`${API_URL}/query`, { query: props.query }).then((result) => {
+      console.log("query returned:");
+      console.log(result);
+      if (result["content"].length === 0) {
+        setQueryResult([]);
+      } else {
+        setQueryResult(result["content"]);
+      }
+    });
   }, [props.query]);
 
   console.log(props.query);

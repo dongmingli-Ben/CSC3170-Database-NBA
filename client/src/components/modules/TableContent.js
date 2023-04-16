@@ -34,8 +34,10 @@ const TableContent = (props) => {
   return (
     <div className="tableContent-container">
       <h3 className="tableContent-header">Query Result</h3>
-      <div className="tableContent-column-container">{columnRow}</div>
-      {content}
+      <div className="tableContent-table-container">
+        <div className="tableContent-column-container">{columnRow}</div>
+        {content}
+      </div>
     </div>
   );
 };
@@ -68,7 +70,13 @@ const TableRow = (props) => {
  * @param {Object} value the cell value
  */
 const TableCell = (props) => {
-  return <div className="">{props.value}</div>;
+  return (
+    <div className="tableCell-container">
+      {typeof props.value === "number" && props.value % 1 !== 0
+        ? Math.round((props.value + Number.EPSILON) * 1000) / 1000
+        : props.value}
+    </div>
+  );
 };
 
 export default TableContent;

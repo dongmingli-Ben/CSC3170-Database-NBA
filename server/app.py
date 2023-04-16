@@ -25,13 +25,15 @@ def get_tables():
 @app.route("/query", methods=['GET'])
 def get_query():
     query = request.args.get('query', '')
+    if query == '':
+        return {'content': ''}
     cursor.execute(query)
     col_names = cursor.column_names
     data = cursor.fetchall()
     result = []
     for item in data:
         result.append(dict(zip(col_names, item)))
-    return {"content": result}
+    return json.dumps({"content": result}, default=str)
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=34152)
