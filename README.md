@@ -76,6 +76,14 @@ Apr 19, 8pm
 
 ## Demo
 
+![image](assets/init-view.png)
+
+![image](assets/table-view.png)
+
+![image](assets/query-view.png)
+
+![image](assets/error-view.png)
+
 ### Frontend
 
 Run:
