@@ -23,7 +23,7 @@ const Query = (props) => {
           type="submit"
           className="submit-btn u-pointer u-bold"
         >
-          Query
+          Query!
         </button>
       </div>
     </div>

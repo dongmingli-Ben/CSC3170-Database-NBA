@@ -16,7 +16,7 @@ const TableList = (props) => {
     return (
       <div
         key={index}
-        className="tableName-container u-pointer"
+        className="tableName-container u-link"
         onClick={() => {
           console.log(tableName);
           props.setQuery(`select * from ${tableName} limit 15;`);

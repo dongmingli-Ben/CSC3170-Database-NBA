@@ -7,6 +7,11 @@
   border-bottom: 1px solid var(--primary);
 }
 
+.tableContent-table-wrapper {
+  overflow-x: auto;
+  width: 100%;
+}
+
 .tableContent-table-container {
   display: table;
 }
