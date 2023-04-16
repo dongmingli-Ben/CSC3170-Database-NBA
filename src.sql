@@ -132,7 +132,7 @@ create table if not exists game_player_info(
     GAME_ID int,
     PLAYER_ID int,
     TEAM_ID int, 
-    PLAYER_POSITION varchar(1)
+    PLAYER_POSITION varchar(1),
     MIN time,
     FGM int,
     FGA int,

@@ -26,6 +26,8 @@ python prepare_data.py
 
 然后使用 workbench 导入数据(`xxx_null.csv`)，导入时间比较长。
 
+Note: `PLAYER_POSITION`在 player_season_info 中删除，加入到 game_player_info 中，对应的 player_season_info.csv 要自行去除相应的字段。
+
 ## Potential Analytical Questions
 
 - Find the top 10 players in terms of points per game (PPG) for the 2021 season
@@ -49,22 +51,25 @@ python prepare_data.py
 - For a specific player, how does his performance change over seasons? You may use graphs to illustrate.
 
 ## Requirements
-1.	Analyze the requirements of the organization
-2.	Identify the relevant entities, attributes, and relationships together with any constraints and properties
-3.	Produce an E-R diagram for the database
-4.	Convert the E-R diagrams to relational schemas (clearly indicating the primary keys, foreign keys, functional and/or multivalued dependencies, as well as justifying that your designs are in good, normalized form)
-5.	Populate the schemas with a reasonable amount of realistic data
-6.	Produce sample SQL queries on these relations that are used for practical daily operations and activities 
-7.	Produce sample SQL queries on these relations which are of an analytic or data mining nature (this part is optional and carries extra bonus points of up to 8% of the total project mark)
-8.	Suggest which data fields of the relational schemas should be indexed or hashed, and explain your decision
-9.	Implement 4 to 6 (and possibly 7) of the above.
+
+1. Analyze the requirements of the organization
+2. Identify the relevant entities, attributes, and relationships together with any constraints and properties
+3. Produce an E-R diagram for the database
+4. Convert the E-R diagrams to relational schemas (clearly indicating the primary keys, foreign keys, functional and/or multivalued dependencies, as well as justifying that your designs are in good, normalized form)
+5. Populate the schemas with a reasonable amount of realistic data
+6. Produce sample SQL queries on these relations that are used for practical daily operations and activities
+7. Produce sample SQL queries on these relations which are of an analytic or data mining nature (this part is optional and carries extra bonus points of up to 8% of the total project mark)
+8. Suggest which data fields of the relational schemas should be indexed or hashed, and explain your decision
+9. Implement 4 to 6 (and possibly 7) of the above.
 
 ## Deadlines
-* Apr 14: submit group info to lead TA
-* Apr 21: check presentation schedule
-* Apr 23: COMPELETE code, slides, presentation!!!
-* Apr 24/26: presentation
-* May 9: submit report
+
+- Apr 14: submit group info to lead TA
+- Apr 21: check presentation schedule
+- Apr 23: COMPELETE code, slides, presentation!!!
+- Apr 24/26: presentation
+- May 9: submit report
 
 ## Next meeting
+
 Apr 19, 8pm

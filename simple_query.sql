@@ -23,12 +23,13 @@ WHERE ps.SEASON = 2021
 GROUP BY ps.TEAM_ABBR;
 
 -- Calculate the average points per game (PPG) and rebounds per game (RPG) for each player position for the 2021 season
-SELECT psi.PLAYER_POSITION,
+SELECT gpi.PLAYER_POSITION,
        AVG(psi.PTS) AS AVG_PPG,
        AVG(psi.ORB + psi.DRB) AS AVG_RPG
 FROM player_season_info psi
-WHERE psi.SEASON = 2021
-GROUP BY psi.PLAYER_POSITION;
+JOIN game_player_info gpi ON psi.PLAYER_ID = gpi.PLAYER_ID
+WHERE psi.SEASON = 2021 AND gpi.PLAYER_POSITION IS NOT NULL
+GROUP BY gpi.PLAYER_POSITION;
 
 -- Find the top 10 players in terms of net rating (NET_RATING)
 SELECT p.PLAYER_NAME, p.NET_RATING
@@ -43,8 +44,9 @@ JOIN team t ON tsi.TEAM_ID = t.TEAM_ID
 WHERE tsi.SEASON = 2021;
 
 -- Find the player with the highest field goal percentage (FG%) for each position in the 2021 season
-SELECT ps.PLAYER_POSITION, p.PLAYER_NAME, MAX(ps.FG_PERCENTAGE) AS MAX_FG_PERCENTAGE
-FROM player_season_info ps
-INNER JOIN player p ON ps.PLAYER_ID = p.PLAYER_ID
-WHERE ps.SEASON = 2021
-GROUP BY ps.PLAYER_POSITION;
+SELECT gpi.PLAYER_POSITION, p.PLAYER_NAME, MAX(psi.FG_PERCENTAGE) AS MAX_FG_PERCENTAGE
+FROM game_player_info gpi
+INNER JOIN player p ON gpi.PLAYER_ID = p.PLAYER_ID
+INNER JOIN player_season_info psi ON psi.PLAYER_ID = gpi.PLAYER_ID
+WHERE psi.SEASON = 2021 AND gpi.PLAYER_POSITION IS NOT NULL
+GROUP BY gpi.PLAYER_POSITION;
