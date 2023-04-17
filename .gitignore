@@ -133,6 +133,7 @@ test.py
 *_null*
 game-player-new.csv
 *_min*
+*.bak
 
 # frontend stuff
 node_modules
