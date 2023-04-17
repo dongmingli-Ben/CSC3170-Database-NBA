@@ -21,8 +21,8 @@
     },
     "game_player_info": {
         "GAME_ID": "GAME_ID",
-        "PLAYER_ID": "TEAM_ID",
-        "TEAM_ID": "PLAYER_ID",
+        "PLAYER_ID": "PLAYER_ID",
+        "TEAM_ID": "TEAM_ID",
         "PLAYER_POSITION": "PLAYER_POSITION",
         "MIN": "MIN",
         "FGM": "FGM",
