@@ -1,14 +1,14 @@
-# NBA 数据
+# NBA Data System
 
-## 任务与分工
+## Members
 
-- 数据清理：
-
-- 提出数据分析问题，写数据库和分析的代码：余加阳，黄颖仪，李东明
-
-- 写 ppt：
-
-下一次 meet 时间：4.15 10 am
+- Jiayang Yu
+- Junyuan Deng
+- Dongming Li
+- Jingqi Wu
+- Zhehan Zhang
+- Chenyi Li
+- Yingyi Huang
 
 ## ER Diagram
 
@@ -18,16 +18,16 @@
 
 ### MySQL WorkBench Table Import Wizard
 
-需要处理原始数据中的空值：
+Need to handle the null values in the csv files before importing the data to the database:
 
 ```bash
 # changes the content in prepare_data according to the comments
 python prepare_data.py
 ```
 
-需要先安装 `pandas` (`pip install pandas`).
+`pandas` (`pip install pandas`) is required.
 
-然后使用 workbench 导入数据(`xxx_null.csv`)，导入时间比较长 (hours)。
+Then use MySQL WorkBench Table Import Wizard to import the csv files (`xxx_null.csv`). It may take hours to import.
 
 ### Python Insertion Script (recommended)
 
