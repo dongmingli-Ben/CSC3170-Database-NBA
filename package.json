@@ -4,7 +4,8 @@
   "description": "CSC3170 project",
   "scripts": {
     "hotloader": "webpack serve --config ./webpack.config.js --mode development --port 5050",
-    "start": "nodemon"
+    "start": "nodemon",
+    "build": "webpack --config ./webpack.config.js"
   },
   "author": "Ben",
   "license": "ISC",

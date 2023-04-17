@@ -137,6 +137,7 @@ game-player-new.csv
 
 # frontend stuff
 node_modules
+bundle.js
 
 # backend stuff
 server/config.json
