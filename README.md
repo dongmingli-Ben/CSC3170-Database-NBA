@@ -130,7 +130,7 @@ Set up configuration first by adding the following to `server/config.json`:
   "user": "your username",
   "password": "your password",
   "host": "127.0.0.1",
-  "database": "nba"
+  "database": "NBA"
 }
 ```
 
