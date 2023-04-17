@@ -21,9 +21,10 @@ const Query = (props) => {
           }}
           value="Query"
           type="submit"
-          className="submit-btn u-pointer u-bold"
+          className="submit-btn u-pointer u-bold u-flex u-flex-justifyCenter u-flex-alignCenter"
         >
-          Query!
+          <div className="query-btn-message-container">Query!</div>
+          <img src="/static/cat_logo.png" className="query-image" />
         </button>
       </div>
     </div>
