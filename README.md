@@ -14,7 +14,7 @@
 
 ![image](assets/er-diagram-0411.jpg)
 
-## 数据导入
+## Data Import
 
 ### MySQL WorkBench Table Import Wizard
 
