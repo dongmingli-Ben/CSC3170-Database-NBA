@@ -10,6 +10,14 @@ import "./TableList.css";
  * @param {(string) => void} setQuery set the query (for exploring tables)
  */
 const TableList = (props) => {
+  if (props.list === null) {
+    return (
+      <div className="tableList-container">
+        <h3 className="tableList-header">Tables</h3>
+        <h5>Loading tables...</h5>
+      </div>
+    );
+  }
   let content;
 
   content = props.list.map((tableName, index) => {

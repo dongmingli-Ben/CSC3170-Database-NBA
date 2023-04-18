@@ -24,7 +24,7 @@ const Query = (props) => {
           className="submit-btn u-pointer u-bold u-flex u-flex-justifyCenter u-flex-alignCenter"
         >
           <div className="query-btn-message-container">Query!</div>
-          <img src="/static/cat_logo.png" className="query-image" />
+          <img src="./static/cat_logo.png" className="query-image" />
         </button>
       </div>
     </div>

@@ -22,7 +22,10 @@ const outputDir = path.resolve(__dirname, "client", "dist");
 
 const webpack = require("webpack");
 
+const isProduction = process.env.NODE_ENV === "production";
+
 module.exports = {
+  mode: isProduction ? "production" : "development",
   entry: ["@babel/polyfill", entryFile],
   output: {
     path: outputDir,
@@ -61,7 +64,7 @@ module.exports = {
   resolve: {
     extensions: ["*", ".js", ".jsx"],
   },
-  plugins: [new webpack.HotModuleReplacementPlugin()],
+  plugins: isProduction ? [] : [new webpack.HotModuleReplacementPlugin()],
   devServer: {
     historyApiFallback: true,
     static: "./client/dist",

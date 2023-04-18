@@ -1,32 +1,37 @@
-# NBA 数据
+# NBA Data System
 
-## 任务与分工
+## Members
 
-- 数据清理：
-
-- 提出数据分析问题，写数据库和分析的代码：余加阳，黄颖仪，李东明
-
-- 写 ppt：
-
-下一次 meet 时间：4.15 10 am
+- Jiayang Yu
+- Junyuan Deng
+- Dongming Li
+- Jingqi Wu
+- Zhehan Zhang
+- Chenyi Li
+- Yingyi Huang
 
 ## ER Diagram
 
 ![image](assets/er-diagram-0411.jpg)
 
-## 数据导入
+## Data Import
 
-需要处理原始数据中的空值：
+### MySQL WorkBench Table Import Wizard
+
+Need to handle the null values in the csv files before importing the data to the database:
 
 ```bash
+# changes the content in prepare_data according to the comments
 python prepare_data.py
 ```
 
-需要先安装 `pandas` (`pip install pandas`).
+`pandas` (`pip install pandas`) is required.
 
-然后使用 workbench 导入数据(`xxx_null.csv`)，导入时间比较长。
+Then use MySQL WorkBench Table Import Wizard to import the csv files (`xxx_null.csv`). It may take hours to import.
 
-Note: `PLAYER_POSITION`在 player_season_info 中删除，加入到 game_player_info 中，对应的 player_season_info.csv 要自行去除相应的字段。
+### Python Insertion Script (recommended)
+
+`mysql-python-connector` and `pandas` need to be installed first and then `python insert_data.py`. The script is much faster than MySQL WorkBench. It should only take less than a minute to complete.
 
 ## Potential Analytical Questions
 
@@ -97,6 +102,27 @@ Then you should be able to view the webpage at `http://localhost:5050/`.
 
 ### Backend
 
+#### Docker
+
+It is recommended to use docker container for easy configuration. You may use [the docker image](https://hub.docker.com/r/mysql/mysql-server/) on docker hub.
+
+After pulling the image,
+
+```bash
+docker run -v /root:/root -p 39000-39010:39000-39010 --name csc3170 -d mysql/mysql-server:latest
+# after the container is up and running, use the following command to obtain the initial mysql password for root
+docker logs mysql1 2>&1 | grep GENERATED
+mysql -uroot -p<password>
+```
+
+In MySQL console, use the following command to reset the password:
+
+```sql
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'password';
+```
+
+#### Running Backend Server
+
 Set up configuration first by adding the following to `server/config.json`:
 
 ```json
@@ -104,7 +130,7 @@ Set up configuration first by adding the following to `server/config.json`:
   "user": "your username",
   "password": "your password",
   "host": "127.0.0.1",
-  "database": "nba"
+  "database": "NBA"
 }
 ```
 
@@ -116,3 +142,5 @@ python app.py
 ```
 
 Note that `flask` needs to be installed first.
+
+To test whether the service is accessible, use `python test_server.py`.

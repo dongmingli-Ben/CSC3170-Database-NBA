@@ -16,7 +16,7 @@ const TABLE = [
   },
 ];
 
-const API_URL = "http://10.31.38.201:34152";
+const API_URL = "http://47.242.150.253:39005";
 
 /**
  * The main display content, including list of tables and query result
@@ -27,9 +27,10 @@ const API_URL = "http://10.31.38.201:34152";
  */
 const Feed = (props) => {
   const [queryResult, setQueryResult] = useState(null);
-  const [tableList, setTableList] = useState([]);
+  const [tableList, setTableList] = useState(null);
   // fetch query result from api
   useEffect(() => {
+    setTableList(null);
     get(`${API_URL}/tables`).then((result) => {
       console.log(result);
       setTableList(result["content"]);
