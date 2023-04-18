@@ -4,7 +4,7 @@
   "homepage": "https://dongmingli-Ben.github.io/CSC3170-Database-NBA",
   "description": "CSC3170 project",
   "scripts": {
-    "hotloader": "webpack serve --config ./webpack.config.js --mode development --port 5050",
+    "hotloader": "webpack serve --config ./webpack.config.js --mode development --port 39017",
     "start": "nodemon",
     "build": "webpack --config ./webpack.config.js",
     "predeploy": "npm run build",
