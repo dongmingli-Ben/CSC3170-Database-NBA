@@ -29,7 +29,7 @@ drop table if exists player_season_info;
 create table if not exists player_season_info(
     PLAYER_ID int,
     SEASON year,
-    TEAM_ABBR char(3), --??? foreign key
+    TEAM_ID int, 
     PLAYER_AGE INT,
     G int, 
     GS int,
@@ -57,7 +57,8 @@ create table if not exists player_season_info(
     PF float,
     PTS float, 
     PRIMARY KEY(PLAYER_ID, SEASON, TEAM_ABBR),
-    FOREIGN KEY(PLAYER_ID) REFERENCES player(PLAYER_ID)
+    FOREIGN KEY(PLAYER_ID) REFERENCES player(PLAYER_ID),
+    FOREIGN KEY(TEAM_ID) REFERENCES team(TEAM_ID)
 );
 
 -- team info
