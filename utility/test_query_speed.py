@@ -24,9 +24,10 @@ def test_query(query: str, count: int = 10):
 def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('-q', '--query', type=str, required=True)
+    parser.add_argument('-n', '--num', type=int, default=10)
     args = parser.parse_args()
     return args
 
 if __name__ == '__main__':
     args = parse_args()
-    test_query(args.query)
+    test_query(args.query, args.num)

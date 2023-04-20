@@ -1,3 +1,4 @@
+USE NBA;
 -- create indices
 CREATE INDEX g_season ON game(SEASON) USING BTREE;
 CREATE INDEX ps_season ON player_season_info(SEASON) USING BTREE;
