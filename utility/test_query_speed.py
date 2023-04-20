@@ -19,7 +19,7 @@ def test_query(query: str, count: int = 10):
         cursor.execute(query)
         cursor.fetchall()
         total_time += time() - t0
-    print(f'Avg speed: {total_time/count:.4f}s for query: {query}')
+    print(f'Avg speed: {total_time/count:.7f}s for query: {query}')
 
 def parse_args():
     parser = argparse.ArgumentParser()
