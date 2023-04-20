@@ -13,10 +13,10 @@ def prepare_cursor():
 app = Flask(__name__)
 CORS(app)
 
-cursor, cnx = prepare_cursor()
 
 @app.route("/tables", methods=['GET'])
 def get_tables():
+    cursor, cnx = prepare_cursor()
     cursor.execute('SHOW tables;')
     result = cursor.fetchall()
     tables = [t[0] for t in result]
@@ -24,6 +24,7 @@ def get_tables():
 
 @app.route("/query", methods=['GET'])
 def get_query():
+    cursor, cnx = prepare_cursor()
     query = request.args.get('query', '')
     if query == '':
         return {'content': ''}
