@@ -16,11 +16,12 @@ GROUP BY ts.TEAM_ID
 ORDER BY AVG_FG_PERCENTAGE DESC;
 
 -- Find the player with the highest usage percentage (USG%) for each team in the 2021 season
-SELECT ps.TEAM_ABBR, p.`PLAYER_NAME`, MAX(p.USG_PCT) AS MAX_USG_PCT
+SELECT t.TEAM_ABBR, p.`PLAYER_NAME`, MAX(p.USG_PCT) AS MAX_USG_PCT
 FROM player_season_info ps
 JOIN player p ON ps.PLAYER_ID = p.PLAYER_ID
+JOIN team t ON ps.TEAM_ID = t.TEAM_ID
 WHERE ps.SEASON = 2021
-GROUP BY ps.TEAM_ABBR;
+GROUP BY ps.TEAM_ID;
 
 -- Calculate the average points per game (PPG) and rebounds per game (RPG) for each player position for the 2021 season
 SELECT gpi.PLAYER_POSITION,

@@ -5,6 +5,8 @@ import json
 from time import time
 from typing import List, Dict
 
+EPS = 1e-10
+
 def prepare_cursor():
     with open('server/config.json') as f:
         config = json.load(f)
@@ -40,7 +42,7 @@ def insert_csv_to_db(path: str, table_name: str, column_map: Dict[str, str], bat
         insert_stmt = statement + f"{', '.join(items_str)};"
         cursor.execute(insert_stmt)
         record_cnt += cursor.rowcount
-        print(f'inserted [{(i+1)*batch_size:6d}:{len(records):6d}], {cursor.rowcount} new rows, avg {batch_size/(time()-t0):.2f} records/s')
+        print(f'inserted [{(i+1)*batch_size:6d}:{len(records):6d}], {cursor.rowcount} new rows, avg {batch_size/(time()-t0 + EPS):.2f} records/s')
 
     cnx.commit()
 
