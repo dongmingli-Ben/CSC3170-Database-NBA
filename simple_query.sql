@@ -9,14 +9,14 @@ ORDER BY PPG DESC
 LIMIT 10;
 
 -- Calculate the average field goal percentage (FG%) for each team for the 2021 season
-SELECT `TEAM_NAME`, AVG(FG_PERCENTAGE) AS AVG_FG_PERCENTAGE
+SELECT TEAM_NAME, AVG(FG_PERCENTAGE) AS AVG_FG_PERCENTAGE
 FROM team_season_info as ts, team
-WHERE SEASON = 2021 and ts.`TEAM_ID` = team.`TEAM_ID`
+WHERE SEASON = 2021 and ts.TEAM_ID = team.TEAM_ID
 GROUP BY ts.TEAM_ID
 ORDER BY AVG_FG_PERCENTAGE DESC;
 
 -- Find the player with the highest usage percentage (USG%) for each team in the 2021 season
-SELECT t.TEAM_ABBR, p.`PLAYER_NAME`, MAX(p.USG_PCT) AS MAX_USG_PCT
+SELECT t.TEAM_ABBR, p.PLAYER_NAME, MAX(p.USG_PCT) AS MAX_USG_PCT
 FROM player_season_info ps
 JOIN player p ON ps.PLAYER_ID = p.PLAYER_ID
 JOIN team t ON ps.TEAM_ID = t.TEAM_ID
