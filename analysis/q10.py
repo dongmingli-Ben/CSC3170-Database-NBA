@@ -1,54 +1,37 @@
-import pandas as pd
+import mysql.connector
 import matplotlib.pyplot as plt
+import requests
 
-# 读取数据
-data = pd.read_csv('data/player_season_info_null.csv')
-
-# 选择一个球员
-#LeBron James，Stephen Curry，Kevin Durant
-player_a = 1495
-player_b = 2178
-player_c = 1397
-
-# 计算每个赛季的得分、助攻和篮板数
-player_data = data[(data['PLAYER_ID'] == player_a)]
-player_PTS = player_data['PTS']
-player_AST = player_data['AST']
-player_TRB = player_data['TRB']
-plt.plot(player_data['SEASON'], player_PTS, label='Points')
-plt.plot(player_data['SEASON'], player_AST, label='Assists')
-plt.plot(player_data['SEASON'], player_TRB, label='Rebounds')
-plt.xlabel('Season')
-plt.ylabel('Stats')
-plt.title('LeBron James Stats over Seasons')
-plt.xticks(player_data['SEASON'], [2021, 2020, 2019, 2018, 2017])
-plt.legend()
-plt.show()
-
-player_data = data[(data['PLAYER_ID'] == player_b)]
-player_PTS = player_data['PTS']
-player_AST = player_data['AST']
-player_TRB = player_data['TRB']
-plt.plot(player_data['SEASON'], player_PTS, label='Points')
-plt.plot(player_data['SEASON'], player_AST, label='Assists')
-plt.plot(player_data['SEASON'], player_TRB, label='Rebounds')
-plt.xlabel('Season')
-plt.ylabel('Stats')
-plt.title('Stephen Curry Stats over Seasons')
-plt.xticks(player_data['SEASON'], [2021, 2020, 2019, 2018, 2017])
-plt.legend()
-plt.show()
-
-player_data = data[(data['PLAYER_ID'] == player_c)]
-player_PTS = player_data['PTS']
-player_AST = player_data['AST']
-player_TRB = player_data['TRB']
-plt.plot(player_data['SEASON'], player_PTS, label='Points')
-plt.plot(player_data['SEASON'], player_AST, label='Assists')
-plt.plot(player_data['SEASON'], player_TRB, label='Rebounds')
-plt.xlabel('Season')
-plt.ylabel('Stats')
-plt.title('Kevin Durant Stats over Seasons')
-plt.xticks(player_data['SEASON'], [2021, 2020, 2018, 2017])
-plt.legend()
-plt.show()
+season = list()
+PTS = list()
+AST = list()
+TRB = list()
+try:
+    resp = requests.get('http://47.242.150.253:39005/query',
+                        params={
+                            'query': "select season, pts, ast, trb from player_season_info where player_id = 1495"
+                        })
+    gram = 0
+    exec("gram = " + resp.text)
+    for x in gram["content"]:
+        # print("season = ", row[0])
+        # print("PTS = ", row[1])
+        # print("AST = ", row[2])
+        # print("TRB = ", row[3])
+        season.append(int(x["season"]))
+        PTS.append(float(x["pts"]))
+        AST.append(float(x["ast"]))
+        TRB.append(float(x["trb"]))
+            
+    plt.plot(season, PTS, label='Points')
+    plt.plot(season, AST, label='Assists')
+    plt.plot(season, TRB, label='Rebounds')
+    plt.xlabel('Season')
+    plt.ylabel('Stats')
+    plt.title('LeBron James Stats over Seasons')
+    plt.xticks(range(min(season), max(season) + 1))
+    plt.legend()
+    plt.show()
+        
+except mysql.connector.Error as e:
+    print("Error reading data from MySQL table", e)

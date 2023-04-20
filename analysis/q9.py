@@ -1,39 +1,26 @@
-import pandas as pd
+import mysql.connector
 import matplotlib.pyplot as plt
+import requests
 
-# 读取数据
-data = pd.read_csv('data/team_season_info_null.csv')
+win_persentage = list()
+season = list()
 
-#1610612744 GSW
-#1610612760 Thunder
-team_a = 1610612744
-team_b = 1610612760
-
-# 筛选该球队的比赛数据
-team_data = data[(data['TEAM_ID'] == team_a)]
-# 计算每个赛季的胜率
-season_win_rate = team_data['WIN%']
-print(season_win_rate)
-
-
-# 绘制折线图
-plt.plot(team_data['SEASON'], season_win_rate.values[::-1], marker="o")
-plt.xlabel('Season')
-plt.ylabel('Win Rate')
-plt.title('GSW Win Rate over Seasons')
-plt.xticks(team_data['SEASON'], [2021, 2020, 2019, 2018, 2017])
-plt.show()
-
-team_data = data[(data['TEAM_ID'] == team_b)]
-# 计算每个赛季的胜率
-season_win_rate = team_data['WIN%']
-print(season_win_rate)
-
-
-# 绘制折线图
-plt.plot(team_data['SEASON'], season_win_rate.values[::-1], marker="o")
-plt.xlabel('Season')
-plt.ylabel('Win Rate')
-plt.title('Thunder Win Rate over Seasons')
-plt.xticks(team_data['SEASON'], [2021, 2020, 2019, 2018, 2017])
-plt.show()
+try:
+    resp = requests.get('http://47.242.150.253:39005/query',
+                        params={
+                            'query': "select win_percentage, season from team_season_info where TEAM_ID=1610612744"
+                        })
+    gram = 0
+    exec("gram = " + resp.text)
+    for x in gram["content"]:
+        win_persentage.append(float(x["win_percentage"]))
+        season.append(int(x["season"]))
+        
+    plt.plot(season, win_persentage, marker="o")
+    plt.xlabel('Season')
+    plt.ylabel('Win_persentage')
+    plt.xticks(range(min(season), max(season) + 1))
+    plt.show()
+        
+except mysql.connector.Error as e:
+    print("Error reading data from MySQL table", e)
