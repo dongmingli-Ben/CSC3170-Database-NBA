@@ -24,6 +24,19 @@ create table if not exists player(
     PRIMARY KEY(PLAYER_ID)
 );
 
+-- team info
+drop table if exists team;
+create table if not exists team(
+    TEAM_ID int,
+    TEAM_NAME varchar(255),
+    TEAM_ABBR char(3),
+    EW_LOCATION char(4),
+    DIVISION varchar(20),
+    TEAM_LOCATION varchar(255),
+    PRIMARY KEY(TEAM_ID)
+);
+
+
 -- player info with specific season
 drop table if exists player_season_info;
 create table if not exists player_season_info(
@@ -56,21 +69,9 @@ create table if not exists player_season_info(
     TOV float,
     PF float,
     PTS float, 
-    PRIMARY KEY(PLAYER_ID, SEASON, TEAM_ABBR),
+    PRIMARY KEY(PLAYER_ID, SEASON, TEAM_ID),
     FOREIGN KEY(PLAYER_ID) REFERENCES player(PLAYER_ID),
     FOREIGN KEY(TEAM_ID) REFERENCES team(TEAM_ID)
-);
-
--- team info
-drop table if exists team;
-create table if not exists team(
-    TEAM_ID int,
-    TEAM_NAME varchar(255),
-    TEAM_ABBR char(3),
-    EW_LOCATION char(4),
-    DIVISION varchar(20),
-    TEAM_LOCATION varchar(255),
-    PRIMARY KEY(TEAM_ID)
 );
 
 -- team info with specific season
