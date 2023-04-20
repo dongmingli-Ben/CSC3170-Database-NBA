@@ -1,5 +1,7 @@
 # NBA Data System
 
+View our [webpage](http://47.242.150.253:39017/).
+
 ## Members
 
 - Jiayang Yu
