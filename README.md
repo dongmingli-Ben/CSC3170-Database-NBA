@@ -17,22 +17,37 @@ View our [webpage](http://47.242.150.253:39017/).
 ![image](assets/er-diagram-0411.jpg)
 
 ## Conda Environment
+
 Follow the requirements.txt.
+
 ```bash
 conda activate <env>
 $ while read requirement; do conda install --yes $requirement || pip install $requirement; done < requirements.txt
 ```
 
 If the command above failed, do
+
 ```bash
 pip install
 ```
+
 to the failed packages.
 
-## Database Schema
-### MySQL Workbench run sql file
-Run `schema.sql` in mysql workbennch.
+Or alternatively, simply use:
 
+```bash
+conda create -n csc3170 python=3.7 mysql-connector-python pandas flask flask-cors
+```
+
+`flask` and `flask-cors` are for backend service. If you do not wish to build the backend server, only `pandas` and `mysql-connector-python` is required.
+
+Note: `python<3.8` is required for `mysql-connector-python`.
+
+## Database Schema
+
+### MySQL Workbench run sql file
+
+Run `schema.sql` in mysql workbennch.
 
 ## Data Import
 
@@ -52,9 +67,70 @@ python prepare_data.py
 python insert_data.py
 ```
 
+Note that to use the insertion script, you need to configure your username and password. See section [Running Backend Server](#running-backend-server) for instructions.
+
+## Indexing
+
+Refer to [`index.sql`](index.sql) for index creation and deletion.
+
+Since our database is relatively small, indices bring little speedup compared with no indexing if any.
+
+### Speed Comparison
+
+Use the following command to calculate the speed of a query (using 10 repetitive queries):
+
+```bash
+python utility/test_query_speed.py -q "<your-query>" -n 10
+```
+
+Note that on Linux, multi-line query is supported as long as it is enclosed by `""`. On Windows, multi-line query would not work.
+
+For the query below, we report the speed with and without indices.
+
+Query 1:
+
+```sql
+select * from game_player_info where player_position='C';
+```
+
+Query 2:
+
+```sql
+select * from game where season=2021;
+```
+
+Query 3:
+
+```sql
+SELECT TEAM_NAME, AVG(FG_PERCENTAGE) AS AVG_FG_PERCENTAGE
+FROM team_season_info as ts, team
+WHERE SEASON = 2021 and ts.TEAM_ID = team.TEAM_ID
+GROUP BY ts.TEAM_ID
+ORDER BY AVG_FG_PERCENTAGE DESC;
+```
+
+Query 4:
+
+```sql
+SELECT gpi.PLAYER_POSITION, p.PLAYER_NAME, MAX(psi.FG_PERCENTAGE) AS MAX_FG_PERCENTAGE
+FROM game_player_info gpi
+INNER JOIN player p ON gpi.PLAYER_ID = p.PLAYER_ID
+INNER JOIN player_season_info psi ON psi.PLAYER_ID = gpi.PLAYER_ID
+WHERE psi.SEASON = 2021 AND gpi.PLAYER_POSITION IS NOT NULL
+GROUP BY gpi.PLAYER_POSITION;
+```
+
+| Query | Time with index | Time without index |
+| ----- | --------------- | ------------------ |
+| #1    | 0.2594422s      | 0.2745347s         |
+| #2    | 0.0062575s      | 0.0059074s         |
+| #3    | 0.0003718s      | 0.0003521s         |
+| #4    | 1.0941s         | 1.0646s            |
+
 ## Webpage Query Interface (Optional)
 
 ### Environment Setup
+
 ```bash
 sudo apt update
 sudo apt install npm
@@ -124,7 +200,6 @@ Note that `flask` needs to be installed first.
 
 To test whether the service is accessible, use `python test_server.py`.
 
-
 ## Analytical Questions
 
 - Find the top 10 players in terms of points per game (PPG) for the 2021 season
@@ -170,4 +245,3 @@ To test whether the service is accessible, use `python test_server.py`.
 ## Next meeting
 
 Apr 19, 8pm
-
