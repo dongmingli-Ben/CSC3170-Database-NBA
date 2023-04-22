@@ -7,7 +7,7 @@ use NBA;
 -- player info
 drop table if exists player;
 create table if not exists player(
-    PLAYER_ID int,
+    PLAYER_ID int NOT NULL auto_increment,
     PLAYER_NAME varchar(255),
     DRAFT_YEAR year,
     COUNTRY varchar(20),
@@ -24,10 +24,12 @@ create table if not exists player(
     PRIMARY KEY(PLAYER_ID)
 );
 
+alter table `player` AUTO_INCREMENT=0;
+
 -- team info
 drop table if exists team;
 create table if not exists team(
-    TEAM_ID int,
+    TEAM_ID int NOT NULL auto_increment,
     TEAM_NAME varchar(255),
     TEAM_ABBR char(3),
     EW_LOCATION char(4),
@@ -39,7 +41,7 @@ create table if not exists team(
 -- game info
 drop table if exists game;
 create table if not exists game(
-    GAME_ID int,
+    GAME_ID int NOT NULL auto_increment,
     GAME_DATE date,
     HOST_TEAM_ID int,
     VISITOR_TEAM_ID int,
@@ -65,7 +67,7 @@ create table if not exists game(
 -- player info with specific season
 drop table if exists player_season_info;
 create table if not exists player_season_info(
-    PLAYER_ID int,
+    PLAYER_ID int NOT NULL auto_increment,
     SEASON year,
     TEAM_ID int, 
     PLAYER_AGE INT,
@@ -102,7 +104,7 @@ create table if not exists player_season_info(
 -- team info with specific season
 drop table if exists team_season_info;
 create table if not exists team_season_info(
-    TEAM_ID int,
+    TEAM_ID int NOT NULL auto_increment,
     SEASON year,
     GP int,
     W int,
@@ -138,7 +140,7 @@ create table if not exists team_season_info(
 -- game info with specific season
 drop table if exists game_player_info;
 create table if not exists game_player_info(
-    GAME_ID int,
+    GAME_ID int NOT NULL auto_increment,
     TEAM_ID int, 
     PLAYER_ID int,
     PLAYER_POSITION varchar(1),
