@@ -109,9 +109,12 @@ create table if not exists game_player_info(
     PTS int, -- Number of points scored by the player
     PLUS_MINUS int, -- Plus - Minus
     PRIMARY KEY(GAME_ID, PLAYER_ID),
-    FOREIGN KEY(GAME_ID) REFERENCES game(GAME_ID),
-    FOREIGN KEY(PLAYER_ID) REFERENCES player(PLAYER_ID),
+    FOREIGN KEY(GAME_ID) REFERENCES game(GAME_ID)
+        ON DELETE CASCADE,
+    FOREIGN KEY(PLAYER_ID) REFERENCES player(PLAYER_ID)
+        ON DELETE CASCADE,
     FOREIGN KEY(TEAM_ID) REFERENCES team(TEAM_ID)
+        ON DELETE CASCADE
 );
 
 -- insert data into DB from csv file name under "/data"
