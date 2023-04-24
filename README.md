@@ -1,6 +1,6 @@
 # NBA Data System
 
-View our [webpage](http://47.242.150.253:39017/).
+View our [webpage](http://175.178.45.209:39017/).
 
 ## Members
 
@@ -14,7 +14,7 @@ View our [webpage](http://47.242.150.253:39017/).
 
 ## ER Diagram
 
-![image](assets/er-diagram-0411.jpg)
+![image](assets/relational_schema.png)
 
 ## Conda Environment
 
@@ -102,6 +102,12 @@ select * from game where season=2021;
 Query 3:
 
 ```sql
+select * from game order by season desc limit 100;
+```
+
+Query 4:
+
+```sql
 SELECT TEAM_NAME, AVG(FG_PERCENTAGE) AS AVG_FG_PERCENTAGE
 FROM team_season_info as ts, team
 WHERE SEASON = 2021 and ts.TEAM_ID = team.TEAM_ID
@@ -109,7 +115,7 @@ GROUP BY ts.TEAM_ID
 ORDER BY AVG_FG_PERCENTAGE DESC;
 ```
 
-Query 4:
+Query 5:
 
 ```sql
 SELECT gpi.PLAYER_POSITION, p.PLAYER_NAME, MAX(psi.FG_PERCENTAGE) AS MAX_FG_PERCENTAGE
@@ -124,8 +130,9 @@ GROUP BY gpi.PLAYER_POSITION;
 | ----- | --------------- | ------------------ |
 | #1    | 0.2594422s      | 0.2745347s         |
 | #2    | 0.0062575s      | 0.0059074s         |
-| #3    | 0.0003718s      | 0.0003521s         |
-| #4    | 1.0941s         | 1.0646s            |
+| #3    | 0.0009847s      | 0.0251754s         |
+| #4    | 0.0003718s      | 0.0003521s         |
+| #5    | 1.0941s         | 1.0646s            |
 
 ## Webpage Query Interface (Optional)
 
@@ -135,6 +142,8 @@ GROUP BY gpi.PLAYER_POSITION;
 sudo apt update
 sudo apt install npm
 ```
+
+See [this link](https://askubuntu.com/a/480642) to update `nodejs` to `>=18.xx.xx`.
 
 ![image](assets/init-view.png)
 
@@ -164,9 +173,9 @@ It is recommended to use docker container for easy configuration. You may use [t
 After pulling the image,
 
 ```bash
-docker run -v /root:/root -p 39000-39010:39000-39010 --name csc3170 -d mysql/mysql-server:latest
+docker run -v /mnt:/mnt -p 39000-39010:39000-39010 --name csc3170 -d mysql/mysql-server:latest
 # after the container is up and running, use the following command to obtain the initial mysql password for root
-docker logs mysql1 2>&1 | grep GENERATED
+docker logs csc3170 2>&1 | grep GENERATED
 mysql -uroot -p<password>
 ```
 
@@ -175,6 +184,20 @@ In MySQL console, use the following command to reset the password:
 ```sql
 ALTER USER 'root'@'localhost' IDENTIFIED BY 'password';
 ```
+
+#### Potential Problems
+
+```
+mysql.connector.errors.DatabaseError: 1130 (HY000): Host '127.0.0.1' is not allowed to connect to this MySQL server
+```
+
+See [this solution](https://stackoverflow.com/a/19101356).
+
+```
+mysql.connector.errors.DatabaseError: 2059 (HY000): Authentication plugin 'caching_sha2_password' cannot be loaded: /mnt/ben/anaconda3/envs/web/lib/plugin/caching_sha2_password.so: cannot open shared object file: No such file or directory
+```
+
+See [this solution](https://stackoverflow.com/a/50130875).
 
 #### Running Backend Server
 
