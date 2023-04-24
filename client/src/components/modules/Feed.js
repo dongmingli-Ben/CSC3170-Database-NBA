@@ -16,7 +16,7 @@ const TABLE = [
   },
 ];
 
-const API_URL = "http://47.242.150.253:39005";
+const API_URL = "http://175.178.45.209:39005";
 
 /**
  * The main display content, including list of tables and query result
