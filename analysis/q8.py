@@ -80,7 +80,6 @@ try:
             rate[key] = home_win[key]/game_win[key]
         else :
             rate[key] = 0
-    print(rate)
 
     plt.plot(rate.keys(), rate.values(), marker="o")
     plt.xlabel('Team')
