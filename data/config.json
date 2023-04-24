@@ -7,13 +7,7 @@
         "GP": "gp",
         "PTS": "pts",
         "REB": "reb",
-        "AST": "ast",
-        "NET_RATING": "net_rating",
-        "OREB_PCT": "oreb_pct",
-        "DREB_PCT": "dreb_pct",
-        "USG_PCT": "usg_pct",
-        "TS_PCT": "ts_pct",
-        "AST_PCT": "ast_pct"
+        "AST": "ast"
     },
     "team": {
         "TEAM_ID": "TEAM_ID",
@@ -46,8 +40,7 @@
     "player_season_info": {
         "PLAYER_ID": "PLAYER_ID",
         "SEASON": "SEASON",
-        "TEAM_ID": "TEAM_ID",
-        "PLAYER_AGE": "PLAYER_AGE"
+        "TEAM_ID": "TEAM_ID"
     },
     "team_season_info": {
         "TEAM_ID": "TEAM_ID",

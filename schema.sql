@@ -15,12 +15,6 @@ create table if not exists player(
     PTS float,
     REB float,
     AST float,
-    NET_RATING float,
-    OREB_PCT float,
-    DREB_PCT float,
-    USG_PCT float,
-    TS_PCT float,
-    AST_PCT float,
     PRIMARY KEY(PLAYER_ID)
 );
 
@@ -70,7 +64,6 @@ create table if not exists player_season_info(
     PLAYER_ID int NOT NULL auto_increment,
     SEASON year,
     TEAM_ID int, 
-    PLAYER_AGE INT,
     PRIMARY KEY(PLAYER_ID, SEASON, TEAM_ID),
     FOREIGN KEY(PLAYER_ID) REFERENCES player(PLAYER_ID),
     FOREIGN KEY(TEAM_ID) REFERENCES team(TEAM_ID)
