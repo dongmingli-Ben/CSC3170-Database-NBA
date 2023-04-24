@@ -40,5 +40,5 @@ def get_query():
     return json.dumps({"content": result}, default=str)
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=39005)
+    app.run(debug=False, host='0.0.0.0', port=39005)
     # app.run(debug=True, host='0.0.0.0', port=39005, ssl_context=('server.crt', 'server.key'))
