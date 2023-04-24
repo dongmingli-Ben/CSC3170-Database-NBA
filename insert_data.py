@@ -16,33 +16,33 @@ def prepare_cursor():
 
 def insert_csv_to_db(path: str, table_name: str, column_map: Dict[str, str], batch_size=10000):
     _t0 = time()
-    df = pd.read_csv(path)
+    df_chunks = pd.read_csv(path, chunksize=batch_size)
     # import pdb; pdb.set_trace()
     db_columns, csv_columns = list(zip(*column_map.items()))
-    df = df[list(csv_columns)]
 
     statement = f"""
         insert ignore into {table_name} ({', '.join(db_columns)})
         values
     """
 
-    df = df.replace({np.nan: None})
-    records = df.to_records(index=False).tolist()
+    # df = df.replace({np.nan: None})
+    # records = df.to_records(index=False).tolist()
     
     cursor, cnx = prepare_cursor()
     cursor.execute('SET autocommit=0;')
 
-    n_batches = (len(records) + batch_size-1) // batch_size
     record_cnt = 0
-    for i in range(n_batches):
+    print('start insertion.')
+    for i, df in enumerate(df_chunks):
         t0 = time()
-        items = records[i*batch_size:(i+1)*batch_size]
+        df = df[list(csv_columns)]
+        items = df.replace({np.nan: None}).to_records(index=False).tolist()
         items_str = [f"({', '.join(map(lambda x: repr(x) if x is not None else 'NULL', item))})" \
                 for item in items]
         insert_stmt = statement + f"{', '.join(items_str)};"
         cursor.execute(insert_stmt)
         record_cnt += cursor.rowcount
-        print(f'inserted [{(i+1)*batch_size:6d}:{len(records):6d}], {cursor.rowcount} new rows, avg {batch_size/(time()-t0 + EPS):.2f} records/s')
+        print(f'inserted [{(i+1)*batch_size:6d}], {cursor.rowcount} new rows, avg {batch_size/(time()-t0 + EPS):.2f} records/s')
 
     cnx.commit()
 
@@ -58,4 +58,4 @@ if __name__ == "__main__":
     data_config = load_data_config('data/config.json')
     for table, col_map in data_config.items():
         print(f'inserting data for {table}')
-        insert_csv_to_db(f'data/{table}.csv', table, col_map)
+        insert_csv_to_db(f'data/{table}.csv', table, col_map, 10000)

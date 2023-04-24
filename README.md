@@ -164,9 +164,9 @@ It is recommended to use docker container for easy configuration. You may use [t
 After pulling the image,
 
 ```bash
-docker run -v /root:/root -p 39000-39010:39000-39010 --name csc3170 -d mysql/mysql-server:latest
+docker run -v /mnt:/mnt -p 39000-39010:39000-39010 --name csc3170 -d mysql/mysql-server:latest
 # after the container is up and running, use the following command to obtain the initial mysql password for root
-docker logs mysql1 2>&1 | grep GENERATED
+docker logs csc3170 2>&1 | grep GENERATED
 mysql -uroot -p<password>
 ```
 
@@ -175,6 +175,20 @@ In MySQL console, use the following command to reset the password:
 ```sql
 ALTER USER 'root'@'localhost' IDENTIFIED BY 'password';
 ```
+
+#### Potential Problems
+
+```
+mysql.connector.errors.DatabaseError: 1130 (HY000): Host '127.0.0.1' is not allowed to connect to this MySQL server
+```
+
+See [this solution](https://stackoverflow.com/a/19101356).
+
+```
+mysql.connector.errors.DatabaseError: 2059 (HY000): Authentication plugin 'caching_sha2_password' cannot be loaded: /mnt/ben/anaconda3/envs/web/lib/plugin/caching_sha2_password.so: cannot open shared object file: No such file or directory
+```
+
+See [this solution](https://stackoverflow.com/a/50130875).
 
 #### Running Backend Server
 
