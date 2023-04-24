@@ -40,16 +40,13 @@ rate = dict()
 
 try:
     # connect to the target db: update ip. user, and pwd
-    resp = requests.get('http://47.242.150.253:39005/query',
+    resp = requests.get('http://175.178.45.209:39005/query',
                         params={
                             'query': "select HOST_TEAM_ID, VISITOR_TEAM_ID, HOME_TEAM_WIN from game"
                         })
     gram = 0
     exec("gram = " + resp.text)
     for x in gram["content"]:
-        # print("HOST_TEAM_ID = ", row[0])
-        # print("VISITOR_TEAM_ID = ", row[1])
-        # print("HOME_TEAM_WIN  = ", row[2])
         host_team_id = team_map[int(x["HOST_TEAM_ID"])]
         visitor_team_id = team_map[int(x["VISITOR_TEAM_ID"])]
         home_team_win = int(x["HOME_TEAM_WIN"])

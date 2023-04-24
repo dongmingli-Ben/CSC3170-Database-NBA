@@ -6,7 +6,7 @@ win_persentage = list()
 season = list()
 
 try:
-    resp = requests.get('http://47.242.150.253:39005/query',
+    resp = requests.get('http://175.178.45.209:39005/query',
                         params={
                             'query': "select win_percentage, season from team_season_info where TEAM_ID=1610612744"
                         })
