@@ -1,6 +1,6 @@
 # NBA Data System
 
-View our [webpage](http://47.242.150.253:39017/).
+View our [webpage](http://175.178.45.209:39017/).
 
 ## Members
 
@@ -14,7 +14,7 @@ View our [webpage](http://47.242.150.253:39017/).
 
 ## ER Diagram
 
-![image](assets/er-diagram-0411.jpg)
+![image](assets/relational_schema.png)
 
 ## Conda Environment
 
