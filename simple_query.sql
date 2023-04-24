@@ -15,11 +15,14 @@ WHERE COUNTRY = 'USA'
 GROUP BY COUNTRY;
 
 
--- To get the top 5 players with the highest net rating
-SELECT PLAYER_NAME, NET_RATING
-FROM player
-ORDER BY NET_RATING DESC
-LIMIT 5;
+-- To get the number of games won by each team in a specific season, along with the total points scored
+SELECT t.TEAM_NAME, tse.W, SUM(gh.PTS_HOME + gv.PTS_AWAY) AS TOTAL_POINTS
+FROM team t
+JOIN team_season_info tse ON tse.TEAM_ID = t.TEAM_ID
+JOIN game gh ON t.TEAM_ID = gh.HOST_TEAM_ID
+JOIN game gv ON t.TEAM_ID = gv.VISITOR_TEAM_ID
+WHERE gh.SEASON = 2021 AND gv.SEASON = 2021 AND tse.SEASON = 2021
+GROUP BY t.TEAM_ID;
 
 
 -- To get the top 5 players with the highest points per game in a specific season
