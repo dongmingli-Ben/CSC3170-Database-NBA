@@ -143,6 +143,8 @@ sudo apt update
 sudo apt install npm
 ```
 
+See [this link](https://askubuntu.com/a/480642) to update `nodejs` to `>=18.xx.xx`.
+
 ![image](assets/init-view.png)
 
 ![image](assets/table-view.png)
