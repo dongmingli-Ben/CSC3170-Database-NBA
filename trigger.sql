@@ -1,9 +1,9 @@
--- output messages from triggers
-DROP TABLE IF EXISTS logger;
-CREATE TABLE logger (
-    ID  BIGINT PRIMARY KEY AUTO_INCREMENT,
-    MSG VARCHAR(500)
-);
+-- -- output messages from triggers
+-- DROP TABLE IF EXISTS logger;
+-- CREATE TABLE logger (
+--     ID  BIGINT PRIMARY KEY AUTO_INCREMENT,
+--     MSG VARCHAR(500)
+-- );
 
 -- check duplicate insert into table: player
 DELIMITER $$
@@ -56,17 +56,17 @@ BEGIN
     DECLARE game_count INT;
     DECLARE new_season YEAR;
 
-    INSERT INTO logger(MSG) VALUES('invoking update_player_season_info');
+    -- INSERT INTO logger(MSG) VALUES('invoking update_player_season_info');
     SET @new_season := (SELECT game.season from game where game.GAME_ID=NEW.GAME_ID limit 1);
     SET @game_count := (SELECT COUNT(*) from game where game.GAME_ID=NEW.GAME_ID);
     SET @player_season_count := (SELECT COUNT(*) FROM player_season_info WHERE SEASON = @new_season AND PLAYER_ID=NEW.PLAYER_ID AND TEAM_ID=NEW.TEAM_ID);
-    INSERT INTO logger(MSG) VALUES(CONCAT('update_player_season_info: GAME_ID = ', NEW.GAME_ID));
-    INSERT INTO logger(MSG) VALUES(CONCAT('update_player_season_info: game_count = ', @game_count));
-    INSERT INTO logger(MSG) VALUES(CONCAT('update_player_season_info: season = ', COALESCE(@new_season, '')));
-    INSERT INTO logger(MSG) VALUES(CONCAT('update_player_season_info: player_season_count = ', @player_season_count));
+    -- INSERT INTO logger(MSG) VALUES(CONCAT('update_player_season_info: GAME_ID = ', NEW.GAME_ID));
+    -- INSERT INTO logger(MSG) VALUES(CONCAT('update_player_season_info: game_count = ', @game_count));
+    -- INSERT INTO logger(MSG) VALUES(CONCAT('update_player_season_info: season = ', COALESCE(@new_season, '')));
+    -- INSERT INTO logger(MSG) VALUES(CONCAT('update_player_season_info: player_season_count = ', @player_season_count));
 
     IF @player_season_count = 0 THEN
-        INSERT INTO logger(MSG) VALUES('update_player_season_info: new record');
+        -- INSERT INTO logger(MSG) VALUES('update_player_season_info: new record');
         INSERT INTO player_season_info(PLAYER_ID, SEASON, TEAM_ID) VALUES(NEW.PLAYER_ID, @new_season, NEW.TEAM_ID);
 
     END IF;
@@ -84,15 +84,15 @@ BEGIN
     DECLARE _REB FLOAT;
     DECLARE _AST FLOAT;
 
-    INSERT INTO logger(MSG) VALUES('invoking update_player_info');
+    -- INSERT INTO logger(MSG) VALUES('invoking update_player_info');
     SET @_GP := (SELECT player.GP from player where player.PLAYER_ID=NEW.PLAYER_ID);
     SET @_PTS := (SELECT player.PTS from player where player.PLAYER_ID=NEW.PLAYER_ID);
     SET @_AST := (SELECT player.AST from player where player.PLAYER_ID=NEW.PLAYER_ID);
     SET @_REB := (SELECT player.REB from player where player.PLAYER_ID=NEW.PLAYER_ID);
-    INSERT INTO logger(MSG) VALUES(CONCAT('update_player_info: GP = ', COALESCE(@_GP, '')));
-    INSERT INTO logger(MSG) VALUES(CONCAT('update_player_info: PTS = ', COALESCE(@_PTS, '')));
-    INSERT INTO logger(MSG) VALUES(CONCAT('update_player_info: AST = ', COALESCE(@_AST, '')));
-    INSERT INTO logger(MSG) VALUES(CONCAT('update_player_info: REB = ', COALESCE(@_REB, '')));
+    -- INSERT INTO logger(MSG) VALUES(CONCAT('update_player_info: GP = ', COALESCE(@_GP, '')));
+    -- INSERT INTO logger(MSG) VALUES(CONCAT('update_player_info: PTS = ', COALESCE(@_PTS, '')));
+    -- INSERT INTO logger(MSG) VALUES(CONCAT('update_player_info: AST = ', COALESCE(@_AST, '')));
+    -- INSERT INTO logger(MSG) VALUES(CONCAT('update_player_info: REB = ', COALESCE(@_REB, '')));
 
     UPDATE player SET GP=@_GP+1, PTS=(@_PTS*@_GP+NEW.PTS)/(@_GP+1), REB=(@_REB*@_GP+NEW.REB)/(@_GP+1), AST=(@_AST*@_GP+NEW.AST)/(@_GP+1) WHERE PLAYER_ID=NEW.PLAYER_ID;
 END; $$
@@ -114,20 +114,20 @@ BEGIN
     DECLARE _W INT;
     DECLARE _L INT;
 
-    INSERT INTO logger(MSG) VALUES('invoking update_team_season_info');
+    -- INSERT INTO logger(MSG) VALUES('invoking update_team_season_info');
     SET @team_season_count := (SELECT COUNT(*) FROM team_season_info WHERE SEASON = NEW.season AND (TEAM_ID=NEW.HOST_TEAM_ID OR TEAM_ID=NEW.VISITOR_TEAM_ID));
     SET @host_team_season_count := (SELECT COUNT(*) FROM team_season_info WHERE SEASON = NEW.season AND TEAM_ID=NEW.HOST_TEAM_ID);
     SET @visitor_team_season_count := (SELECT COUNT(*) FROM team_season_info WHERE SEASON = NEW.season AND TEAM_ID=NEW.VISITOR_TEAM_ID);
-    INSERT INTO logger(MSG) VALUES(CONCAT('update_team_season_info: team_season_count = ', @team_season_count));
-    INSERT INTO logger(MSG) VALUES(CONCAT('update_team_season_info: host_team_season_count = ', @host_team_season_count));
-    INSERT INTO logger(MSG) VALUES(CONCAT('update_team_season_info: visitor_team_season_count = ', @visitor_team_season_count));
+    -- INSERT INTO logger(MSG) VALUES(CONCAT('update_team_season_info: team_season_count = ', @team_season_count));
+    -- INSERT INTO logger(MSG) VALUES(CONCAT('update_team_season_info: host_team_season_count = ', @host_team_season_count));
+    -- INSERT INTO logger(MSG) VALUES(CONCAT('update_team_season_info: visitor_team_season_count = ', @visitor_team_season_count));
 
     IF @host_team_season_count = 0 THEN
         IF NEW.HOME_TEAM_WIN = 1 THEN
-            INSERT INTO logger(MSG) VALUES(CONCAT('update_team_season_info: HOME_TEAM_WIN ', NEW.HOST_TEAM_ID, ' ', NEW.SEASON));
+            -- INSERT INTO logger(MSG) VALUES(CONCAT('update_team_season_info: HOME_TEAM_WIN ', NEW.HOST_TEAM_ID, ' ', NEW.SEASON));
             INSERT INTO team_season_info(TEAM_ID, SEASON, GP, W, L) VALUES(NEW.HOST_TEAM_ID, NEW.SEASON, 1, 1, 0);
         ELSE
-            INSERT INTO logger(MSG) VALUES(CONCAT('update_team_season_info: HOME_TEAM_LOSS ', NEW.HOST_TEAM_ID, ' ', NEW.SEASON));
+            -- INSERT INTO logger(MSG) VALUES(CONCAT('update_team_season_info: HOME_TEAM_LOSS ', NEW.HOST_TEAM_ID, ' ', NEW.SEASON));
             INSERT INTO team_season_info(TEAM_ID, SEASON, GP, W, L) VALUES(NEW.HOST_TEAM_ID, NEW.SEASON, 1, 0, 1);
         END IF;
     ELSE 
