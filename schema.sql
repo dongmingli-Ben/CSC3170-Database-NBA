@@ -11,10 +11,10 @@ create table if not exists player(
     PLAYER_NAME varchar(255),
     DRAFT_YEAR year,
     COUNTRY varchar(20),
-    GP int,
-    PTS float,
-    REB float,
-    AST float,
+    GP int, -- Games played throughout the season
+    PTS float, -- Average number of points scored
+    REB float, -- Average number of rebounds grabbed
+    AST float, -- Average number of assists distributed
     PRIMARY KEY(PLAYER_ID)
 );
 
@@ -37,22 +37,22 @@ drop table if exists game;
 create table if not exists game(
     GAME_ID int NOT NULL auto_increment,
     GAME_DATE date,
-    HOST_TEAM_ID int,
-    VISITOR_TEAM_ID int,
-    SEASON year,
-    PTS_HOME int,
-    FG_PCT_HOME float,
-    FT_PCT_HOME float,
-    FG3_PCT_HOME float,
-    AST_HOME int,
-    REB_HOME int,
-    PTS_AWAY int,
-    FG_PCT_AWAY float,
-    FT_PCT_AWAY float,
-    FG3_PCT_AWAY float,
-    AST_AWAY int,
-    REB_AWAY int,
-    HOME_TEAM_WIN tinyint, -- 0/1
+    HOST_TEAM_ID int, -- ID of the home team
+    VISITOR_TEAM_ID int, -- ID of the visitor team
+    SEASON year, -- Season when the game occured
+    PTS_HOME int, -- Number of points scored by home team
+    FG_PCT_HOME float, -- Field Goal Percentage home team
+    FT_PCT_HOME float, -- Free Throw Percentage of the home team
+    FG3_PCT_HOME float, -- Three Point Percentageof the home team
+    AST_HOME int, -- Assists of the home team
+    REB_HOME int, -- Rebounds of the home team
+    PTS_AWAY int, -- Number of points scored by away team
+    FG_PCT_AWAY float, -- Field Goal Percentage away team
+    FT_PCT_AWAY float, -- Free Throw Percentage of the away team
+    FG3_PCT_AWAY float, -- Three Point Percentage of the away team
+    AST_AWAY int, -- Assists of the away team
+    REB_AWAY int, -- Rebounds of the away team
+    HOME_TEAM_WIN tinyint, -- 0/1 If home team won the game
     PRIMARY KEY(GAME_ID),
     FOREIGN KEY(HOST_TEAM_ID) REFERENCES team(TEAM_ID),
     FOREIGN KEY(VISITOR_TEAM_ID) REFERENCES team(TEAM_ID)
@@ -89,25 +89,25 @@ create table if not exists game_player_info(
     PLAYER_ID int,
     PLAYER_POSITION varchar(1),
     MIN time,
-    FGM int,
-    FGA int,
-    FG_PCT float,
-    FG3M int,
-    FG3A int,
-    FG3_PCT float,
-    FTM int,
-    FTA int,
-    FT_PCT float,
-    OREB int,
-    DREB int,
-    REB int,
-    AST int, 
-    STL int,
-    BLK int,
-    TO_NUM int,
-    PF int,
-    PTS int,
-    PLUS_MINUS int,
+    FGM int, -- Field Goals Made
+    FGA int, -- Field Goals Attempted
+    FG_PCT float, -- Field Goal Percentage
+    FG3M int, -- Three Pointers Made
+    FG3A int, -- Three Pointers Attempted
+    FG3_PCT float, -- Three Point Percentage
+    FTM int, -- Free Throws Made
+    FTA int, -- Free Throws Attempted
+    FT_PCT float, -- Free Throw Percentage
+    OREB int, -- Offensive Rebounds
+    DREB int, -- Defensive Rebounds
+    REB int, -- Rebounds
+    AST int,  -- Assists
+    STL int, -- Steals
+    BLK int, -- Blocked shots
+    TO_NUM int, -- Turnovers
+    PF int, -- Personnal Foul
+    PTS int, -- Number of points scored by the player
+    PLUS_MINUS int, -- Plus - Minus
     PRIMARY KEY(GAME_ID, PLAYER_ID),
     FOREIGN KEY(GAME_ID) REFERENCES game(GAME_ID),
     FOREIGN KEY(PLAYER_ID) REFERENCES player(PLAYER_ID),
