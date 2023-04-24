@@ -102,6 +102,12 @@ select * from game where season=2021;
 Query 3:
 
 ```sql
+select * from game order by season desc limit 100;
+```
+
+Query 4:
+
+```sql
 SELECT TEAM_NAME, AVG(FG_PERCENTAGE) AS AVG_FG_PERCENTAGE
 FROM team_season_info as ts, team
 WHERE SEASON = 2021 and ts.TEAM_ID = team.TEAM_ID
@@ -109,7 +115,7 @@ GROUP BY ts.TEAM_ID
 ORDER BY AVG_FG_PERCENTAGE DESC;
 ```
 
-Query 4:
+Query 5:
 
 ```sql
 SELECT gpi.PLAYER_POSITION, p.PLAYER_NAME, MAX(psi.FG_PERCENTAGE) AS MAX_FG_PERCENTAGE
@@ -124,8 +130,9 @@ GROUP BY gpi.PLAYER_POSITION;
 | ----- | --------------- | ------------------ |
 | #1    | 0.2594422s      | 0.2745347s         |
 | #2    | 0.0062575s      | 0.0059074s         |
-| #3    | 0.0003718s      | 0.0003521s         |
-| #4    | 1.0941s         | 1.0646s            |
+| #3    | 0.0009847s      | 0.0251754s         |
+| #4    | 0.0003718s      | 0.0003521s         |
+| #5    | 1.0941s         | 1.0646s            |
 
 ## Webpage Query Interface (Optional)
 
