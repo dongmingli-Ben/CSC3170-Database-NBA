@@ -15,12 +15,6 @@ create table if not exists player(
     PTS float, -- Average number of points scored
     REB float, -- Average number of rebounds grabbed
     AST float, -- Average number of assists distributed
-    NET_RATING float, -- Team's point differential per 100 possessions while the player is on the court
-    OREB_PCT float, -- Percentage of available offensive rebounds the player grabbed while he was on the floor
-    DREB_PCT float, -- Percentage of available defensive rebounds the player grabbed while he was on the floor
-    USG_PCT float, -- Percentage of team plays used by the player while he was on the floor (FGA + Possession Ending FTA + TO) / POSS)
-    TS_PCT float, -- Measure of the player's shooting efficiency that takes into account free throws, 2 and 3 point shots 
-    AST_PCT float, -- Percentage of teammate field goals the player assisted while he was on the floor
     PRIMARY KEY(PLAYER_ID)
 );
 
@@ -70,7 +64,6 @@ create table if not exists player_season_info(
     PLAYER_ID int NOT NULL auto_increment,
     SEASON year,
     TEAM_ID int, 
-    PLAYER_AGE INT,
     PRIMARY KEY(PLAYER_ID, SEASON, TEAM_ID),
     FOREIGN KEY(PLAYER_ID) REFERENCES player(PLAYER_ID),
     FOREIGN KEY(TEAM_ID) REFERENCES team(TEAM_ID)
@@ -116,9 +109,12 @@ create table if not exists game_player_info(
     PTS int, -- Number of points scored by the player
     PLUS_MINUS int, -- Plus - Minus
     PRIMARY KEY(GAME_ID, PLAYER_ID),
-    FOREIGN KEY(GAME_ID) REFERENCES game(GAME_ID),
-    FOREIGN KEY(PLAYER_ID) REFERENCES player(PLAYER_ID),
+    FOREIGN KEY(GAME_ID) REFERENCES game(GAME_ID)
+        ON DELETE CASCADE,
+    FOREIGN KEY(PLAYER_ID) REFERENCES player(PLAYER_ID)
+        ON DELETE CASCADE,
     FOREIGN KEY(TEAM_ID) REFERENCES team(TEAM_ID)
+        ON DELETE CASCADE
 );
 
 -- insert data into DB from csv file name under "/data"
