@@ -88,7 +88,6 @@ create table if not exists team_season_info(
     FOREIGN KEY(TEAM_ID) REFERENCES team(TEAM_ID)
 );
 
-
 -- game info with specific season
 drop table if exists game_player_info;
 create table if not exists game_player_info(
