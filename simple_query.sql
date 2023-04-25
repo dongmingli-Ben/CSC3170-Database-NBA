@@ -16,13 +16,23 @@ GROUP BY COUNTRY;
 
 
 -- To get the number of games won by each team in a specific season, along with the total points scored
-SELECT t.TEAM_NAME, tse.W, SUM(gh.PTS_HOME + gv.PTS_AWAY) AS TOTAL_POINTS
+SELECT t.TEAM_NAME, tgh.W, tgh.PTS_HOME + tgv.PTS_AWAY AS TOTAL_POINTS
 FROM team t
-JOIN team_season_info tse ON tse.TEAM_ID = t.TEAM_ID
-JOIN game gh ON t.TEAM_ID = gh.HOST_TEAM_ID
-JOIN game gv ON t.TEAM_ID = gv.VISITOR_TEAM_ID
-WHERE gh.SEASON = 2021 AND gv.SEASON = 2021 AND tse.SEASON = 2021
-GROUP BY t.TEAM_ID;
+JOIN (
+    SELECT tse.TEAM_ID, SUM(gh.PTS_HOME) AS PTS_HOME, tse.W
+    FROM team_season_info tse
+    JOIN game gh ON tse.TEAM_ID = gh.HOST_TEAM_ID
+    WHERE gh.SEASON = 2021 AND tse.SEASON = 2021
+    GROUP BY tse.TEAM_ID
+) tgh ON t.TEAM_ID = tgh.TEAM_ID
+JOIN (
+    SELECT tse.TEAM_ID, SUM(gv.PTS_AWAY) AS PTS_AWAY, tse.W
+    FROM team_season_info tse
+    JOIN game gv ON tse.TEAM_ID = gv.VISITOR_TEAM_ID
+    WHERE gv.SEASON = 2021 AND tse.SEASON = 2021
+    GROUP BY tse.TEAM_ID
+) tgv ON t.TEAM_ID = tgv.TEAM_ID
+ORDER BY TOTAL_POINTS DESC;
 
 
 -- To get the top 5 players with the highest points per game in a specific season
