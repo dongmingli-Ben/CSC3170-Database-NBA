@@ -53,14 +53,6 @@ WHERE tse.SEASON = '2021'
 ORDER BY tse.GP DESC;
 
 
--- To get the total number of games won by each team in a specific season
-SELECT t.TEAM_NAME, tse.W
-FROM team t
-JOIN team_season_info tse ON t.TEAM_ID = tse.TEAM_ID
-WHERE tse.SEASON = '2021'
-ORDER BY tse.W DESC;
-
-
 -- To get the average points, rebounds, and assists for players from each country
 SELECT COUNTRY, AVG(PTS) AS AVG_POINTS, AVG(REB) AS AVG_REBOUNDS, AVG(AST) AS AVG_ASSISTS
 FROM player

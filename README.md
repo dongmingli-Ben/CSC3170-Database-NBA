@@ -225,19 +225,19 @@ To test whether the service is accessible, use `python test_server.py`.
 
 ## Analytical Questions
 
-- Find the top 10 players in terms of points per game (PPG) for the 2021 season
+- To get the total number of games played by each team in the 2021 season
 
-- Calculate the average field goal percentage (FG%) for each team for the 2021 season
+- To get the average points, rebounds, and assists for players from USA
 
-- Find the player with the highest usage percentage (USG%) for each team in the 2021 season
+- To get the number of games won by each team in a specific season, along with the total points scored
 
-- Calculate the average points per game (PPG) and rebounds per game (RPG) for each player position for the 2021 season
+- To get the top 5 players with the highest points per game in a specific season
 
-- Find the top 10 players in terms of net rating (NET_RATING) for the 2021 season
+- To get the total number of games played by each team in a specific season, along with their win-loss record
 
-- Calculate the number of wins and losses for each team in the 2021 season
+- To get the average points, rebounds, and assists for players from each country
 
-- Find the player with the highest field goal percentage (FG%) for each position in the 2021 season
+- To get the number of games won and lost by a specific team in a specific season
 
 - Are teams more likely to win when they are the host? If so, by how much?
 
